@@ -34,7 +34,7 @@ jobs:
     - save_cache:
         key: repo-{{ .Branch }}-{{ checksum ".circle-sha" }}
         paths:
-        - ~/project
+          - ~/project
 
   php_test:
     docker:
@@ -50,10 +50,12 @@ jobs:
       - run:
           name: Run PHP Unit Tests
           command: ./vendor/bin/phpunit
+      - store_test_results:
+          path: test-results
       - save_cache:
           key: codegen-{{ checksum ".circle-sha" }}
           paths:
-          - ~/project/src/Result
+            - ~/project/src/Result
 
   deploy_to_github:
     docker:

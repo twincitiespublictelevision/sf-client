@@ -21,7 +21,7 @@
     <php>
     </php>
     <logging>
-        <log type="coverage-html" target="./tests-results/report" />
-        <log type="junit" target="./tests-results/tests.xml"/>
+        <log type="coverage-html" target="./test-results/report" />
+        <log type="junit" target="./test-results/results.xml"/>
     </logging>
 </phpunit>
