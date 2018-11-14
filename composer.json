@@ -2,20 +2,13 @@
     "name": "twincitiespublictelevision/sf-client",
     "description": "Miniature SalesForce REST API client",
     "type": "library",
-    "repositories": [
-      {
-        "type": "vcs",
-        "url": "https://github.com/twincitiespublictelevision/CodeGen.git"
-      }
-    ],
     "require": {
         "guzzlehttp/guzzle": "^6.3",
         "ext-json": "*",
         "php": ">=7.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.4",
-        "corneltek/codegen": "dev-tpt"
+        "phpunit/phpunit": "^7.4"
     },
     "license": "proprietary",
     "authors": [
