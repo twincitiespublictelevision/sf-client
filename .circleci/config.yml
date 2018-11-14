@@ -43,10 +43,7 @@ jobs:
       - run: echo $CIRCLE_SHA1 > .circle-sha
       - restore_cache:
           key: repo-{{ .Branch }}-{{ checksum ".circle-sha" }}
-      - run:
-          name: Install PHP extensions
-          command: |
-            sudo docker-php-ext-install pcntl
+      - run: composer install
       - run:
           name: Result Class CodeGen
           command: php codegen/generate.php
