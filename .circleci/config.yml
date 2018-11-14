@@ -47,8 +47,6 @@ jobs:
           name: Install PHP extensions
           command: |
             sudo docker-php-ext-install pcntl
-            sudo docker-php-ext-install xdebug
-            sudo docker-php-ext-enable xdebug
       - run:
           name: Result Class CodeGen
           command: php codegen/generate.php
