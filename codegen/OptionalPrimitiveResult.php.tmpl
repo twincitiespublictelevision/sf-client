@@ -1,0 +1,78 @@
+<?php
+
+namespace <N>;
+
+use SFClient\Result\Result;
+
+/**
+ * Class <T>Result
+ * @package <N>
+ */
+class <T>Result {
+
+  /**
+   * @var Result
+   */
+  protected $_res;
+
+  /**
+   * <T> constructor.
+   * @param Result $res
+   */
+  public function __construct(Result $res) {
+      $this->res = $res;
+  }
+
+  /**
+   * @param <t>|null $value
+   * @return <T>Result
+   */
+  public static function ok(?<t> $value): <T>Result {
+      return new <T>Result(Result::ok($value));
+  }
+
+  /**
+   * @param \Exception $err
+   * @return <T>Result
+   */
+  public static function err(\Exception $err): <T>Result {
+      return new <T>Result(Result::err($err));
+  }
+
+  /**
+   * @return bool
+   */
+  public function isOk(): bool {
+      return $this->res->isOk();
+  }
+
+  /**
+   * @return bool
+   */
+  public function isError(): bool {
+      return $this->res->isError();
+  }
+
+  /**
+   * @return <t>|null
+   * @throws \Exception
+   */
+  public function value(): ?<t> {
+      return $this->res->value();
+  }
+
+  /**
+   * @return \Exception
+   */
+  public function getErr(): \Exception {
+      return $this->res->getErr();
+  }
+
+  /**
+   * @param $fallback
+   * @return mixed
+   */
+  public function valueOr($fallback) {
+      return $this->res->valueOr($fallback);
+  }
+}
