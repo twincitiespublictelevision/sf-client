@@ -62,7 +62,7 @@ jobs:
       - save_cache:
           key: docs-{{ checksum ".circle-sha" }}
           paths:
-          - ~/project/src
+          - ~/project/docs
 
   deploy_to_github:
     docker:
