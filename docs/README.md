@@ -548,6 +548,8 @@ support for the custom objects that are supplied by the NPSP package.
 <?php
 
 $client = new NPSPClient(SFAPIClient::connect($endpoint, $auth));
+
+?>
 </code>
 
 * Full name: \SFClient\NPSPClient
@@ -5236,7 +5238,7 @@ NPSPClient::deleteUserProvisioningRequest( string $id ): \SFClient\Result\BoolRe
 
 ### __construct
 
-
+NPSPClient constructor.
 
 ```php
 NPSPClient::__construct( \SFClient\SalesForce\SFAPIClient $client )

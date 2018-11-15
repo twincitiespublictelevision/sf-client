@@ -18,6 +18,8 @@ use SFClient\SalesForce\SFAPIClient;
  * <?php
  *
  * $client = new NPSPClient(SFAPIClient::connect($endpoint, $auth));
+ *
+ * ?>
  * </code>
  *
  * @package SFClient
@@ -232,6 +234,11 @@ use SFClient\SalesForce\SFAPIClient;
  * @method BoolResult deleteUserProvisioningRequest(string $id)
  */
 class NPSPClient extends Client {
+
+  /**
+   * NPSPClient constructor.
+   * @param SFAPIClient $client
+   */
   public function __construct(SFAPIClient $client) {
     parent::__construct($client);
     $types = require __DIR__ . '/SalesForce/ObjectTypes.php';
