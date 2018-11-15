@@ -331,6 +331,9 @@ BoolResult::ok( boolean $value ): \SFClient\Result\BoolResult
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::ok() 
 
 ---
 
@@ -353,6 +356,9 @@ BoolResult::err( \Exception $err ): \SFClient\Result\BoolResult
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::err() 
 
 ---
 
@@ -369,6 +375,9 @@ BoolResult::isOk(  ): boolean
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::isOK() 
 
 ---
 
@@ -385,6 +394,9 @@ BoolResult::isError(  ): boolean
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::Error() 
 
 ---
 
@@ -401,6 +413,9 @@ BoolResult::value(  ): boolean
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::value() 
 
 ---
 
@@ -417,6 +432,9 @@ BoolResult::getErr(  ): \Exception
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::getErr() 
 
 ---
 
@@ -439,6 +457,9 @@ BoolResult::valueOr(  $fallback ): mixed
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::valueOr() 
 
 ---
 
@@ -5317,20 +5338,21 @@ Result::isOk(  ): boolean
 
 ### value
 
-Attempts to extract and return the success value. If the result was a
-success then the value is returned. If the result was a failure then
-calling this method will throw the exception that is stored.
+Attempts to extract and return the success value.
 
 ```php
 Result::value(  ): mixed
 ```
 
+If the result was a success then the value is returned. If the result was
+a failure then calling this method will throw the exception that is stored.
+
 ```php
 $resultA = Result::ok("foo");
-echo $result->value(); // foo
+echo $resultA->value(); // foo
 
 $resultB = Result::err(new \Exception("Bar error");
-echo $result->value(); // PHP Fatal error:  Uncaught exception ...
+echo $resultB->value(); // PHP Fatal error:  Uncaught exception ...
 ```
 
 To safely handle a result and extract its value the caller can use either
@@ -5348,7 +5370,7 @@ if ($resultA->isOk()) {
 $resultB = Result::err(new \Exception("Bar error");
 
 try {
-  echo $result->value();
+  echo $resultB->value();
 } catch (\Exception $e) {
   echo $e->getMessage(); // Bar error
 }
@@ -5389,10 +5411,10 @@ Result::valueOr( mixed $fallback ): mixed
 
 ```php
 $resultA = Result::ok("alpha");
-echo $result->valueOr(""beta"); // alpha
+echo $resultA->valueOr("beta"); // alpha
 
 $resultB = Result::err(new \Exception("delta error");
-echo $result->valueOr("gamma"); // gamma
+echo $resultB->valueOr("gamma"); // gamma
 ```
 
 
@@ -5939,6 +5961,9 @@ SFCreationResult::ok( \SFClient\SalesForce\SFCreation $value ): \SFClient\Result
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::ok() 
 
 ---
 
@@ -5961,6 +5986,9 @@ SFCreationResult::err( \Exception $err ): \SFClient\Result\SFCreationResult
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::err() 
 
 ---
 
@@ -5977,6 +6005,9 @@ SFCreationResult::isOk(  ): boolean
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::isOk() 
 
 ---
 
@@ -5993,6 +6024,9 @@ SFCreationResult::isError(  ): boolean
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::isError() 
 
 ---
 
@@ -6009,6 +6043,9 @@ SFCreationResult::value(  ): \SFClient\SalesForce\SFCreation
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::value() 
 
 ---
 
@@ -6025,6 +6062,9 @@ SFCreationResult::getErr(  ): \Exception
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::getErr() 
 
 ---
 
@@ -6047,6 +6087,9 @@ SFCreationResult::valueOr(  $fallback ): mixed
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::valueOr() 
 
 ---
 
@@ -6221,6 +6264,9 @@ SFRecordsResult::ok( \SFClient\SalesForce\SFRecords $value ): \SFClient\Result\S
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::ok() 
 
 ---
 
@@ -6243,6 +6289,9 @@ SFRecordsResult::err( \Exception $err ): \SFClient\Result\SFRecordsResult
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::err() 
 
 ---
 
@@ -6259,6 +6308,9 @@ SFRecordsResult::isOk(  ): boolean
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::isOk() 
 
 ---
 
@@ -6275,6 +6327,9 @@ SFRecordsResult::isError(  ): boolean
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::isError() 
 
 ---
 
@@ -6291,6 +6346,9 @@ SFRecordsResult::value(  ): \SFClient\SalesForce\SFRecords
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::value() 
 
 ---
 
@@ -6307,6 +6365,9 @@ SFRecordsResult::getErr(  ): \Exception
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::getErr() 
 
 ---
 
@@ -6329,6 +6390,9 @@ SFRecordsResult::valueOr(  $fallback ): mixed
 
 
 
+**See Also:**
+
+* \SFClient\Result\Result::valueOr() 
 
 ---
 

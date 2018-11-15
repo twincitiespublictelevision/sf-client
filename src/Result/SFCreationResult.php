@@ -27,6 +27,7 @@ class SFCreationResult {
   /**
    * @param SFCreation $value
    * @return SFCreationResult
+   * @see Result::ok()
    */
   public static function ok(SFCreation $value): SFCreationResult {
       return new SFCreationResult(Result::ok($value));
@@ -35,6 +36,7 @@ class SFCreationResult {
   /**
    * @param \Exception $err
    * @return SFCreationResult
+   * @see Result::err()
    */
   public static function err(\Exception $err): SFCreationResult {
       return new SFCreationResult(Result::err($err));
@@ -42,6 +44,7 @@ class SFCreationResult {
 
   /**
    * @return bool
+   * @see Result::isOk()
    */
   public function isOk(): bool {
       return $this->res->isOk();
@@ -49,6 +52,7 @@ class SFCreationResult {
 
   /**
    * @return bool
+   * @see Result::isError()
    */
   public function isError(): bool {
       return $this->res->isError();
@@ -57,6 +61,7 @@ class SFCreationResult {
   /**
    * @return SFCreation
    * @throws \Exception
+   * @see Result::value()
    */
   public function value(): SFCreation {
       return $this->res->value();
@@ -64,6 +69,7 @@ class SFCreationResult {
 
   /**
    * @return \Exception
+   * @see Result::getErr()
    */
   public function getErr(): \Exception {
       return $this->res->getErr();
@@ -72,6 +78,7 @@ class SFCreationResult {
   /**
    * @param $fallback
    * @return mixed
+   * @see Result::valueOr()
    */
   public function valueOr($fallback) {
       return $this->res->valueOr($fallback);

@@ -26,6 +26,7 @@ class BoolResult {
   /**
    * @param bool $value
    * @return BoolResult
+   * @see Result::ok()
    */
   public static function ok(bool $value): BoolResult {
       return new BoolResult(Result::ok($value));
@@ -34,6 +35,7 @@ class BoolResult {
   /**
    * @param \Exception $err
    * @return BoolResult
+   * @see Result::err()
    */
   public static function err(\Exception $err): BoolResult {
       return new BoolResult(Result::err($err));
@@ -41,6 +43,7 @@ class BoolResult {
 
   /**
    * @return bool
+   * @see Result::isOK()
    */
   public function isOk(): bool {
       return $this->res->isOk();
@@ -48,6 +51,7 @@ class BoolResult {
 
   /**
    * @return bool
+   * @see Result::Error()
    */
   public function isError(): bool {
       return $this->res->isError();
@@ -56,6 +60,7 @@ class BoolResult {
   /**
    * @return bool
    * @throws \Exception
+   * @see Result::value()
    */
   public function value(): bool {
       return $this->res->value();
@@ -63,6 +68,7 @@ class BoolResult {
 
   /**
    * @return \Exception
+   * @see Result::getErr()
    */
   public function getErr(): \Exception {
       return $this->res->getErr();
@@ -71,6 +77,7 @@ class BoolResult {
   /**
    * @param $fallback
    * @return mixed
+   * @see Result::valueOr()
    */
   public function valueOr($fallback) {
       return $this->res->valueOr($fallback);

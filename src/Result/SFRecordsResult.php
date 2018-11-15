@@ -27,6 +27,7 @@ class SFRecordsResult {
   /**
    * @param SFRecords $value
    * @return SFRecordsResult
+   * @see Result::ok()
    */
   public static function ok(SFRecords $value): SFRecordsResult {
       return new SFRecordsResult(Result::ok($value));
@@ -35,6 +36,7 @@ class SFRecordsResult {
   /**
    * @param \Exception $err
    * @return SFRecordsResult
+   * @see Result::err()
    */
   public static function err(\Exception $err): SFRecordsResult {
       return new SFRecordsResult(Result::err($err));
@@ -42,6 +44,7 @@ class SFRecordsResult {
 
   /**
    * @return bool
+   * @see Result::isOk()
    */
   public function isOk(): bool {
       return $this->res->isOk();
@@ -49,6 +52,7 @@ class SFRecordsResult {
 
   /**
    * @return bool
+   * @see Result::isError()
    */
   public function isError(): bool {
       return $this->res->isError();
@@ -57,6 +61,7 @@ class SFRecordsResult {
   /**
    * @return SFRecords
    * @throws \Exception
+   * @see Result::value()
    */
   public function value(): SFRecords {
       return $this->res->value();
@@ -64,6 +69,7 @@ class SFRecordsResult {
 
   /**
    * @return \Exception
+   * @see Result::getErr()
    */
   public function getErr(): \Exception {
       return $this->res->getErr();
@@ -72,6 +78,7 @@ class SFRecordsResult {
   /**
    * @param $fallback
    * @return mixed
+   * @see Result::valueOr()
    */
   public function valueOr($fallback) {
       return $this->res->valueOr($fallback);
