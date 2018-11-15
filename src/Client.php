@@ -206,10 +206,10 @@ class Client {
 
   /**
    * @param string $name
-   * @return null|string
+   * @return null|array
    * @internal
    */
-  public function getRESTParts(string $name): ?array {
+  public function getRESTParts(string $name) {
     $methods = ['get', 'patch', 'create', 'delete'];
 
     foreach ($methods as $_ => $method) {
