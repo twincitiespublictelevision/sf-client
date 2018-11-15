@@ -84,7 +84,6 @@ class SFAPIClient {
    * given authentication mechanism. It is expected that the caller has
    * correctly configured the Http client ahead of time with the appropriate
    * SalesForce base endpoint url.
-   *
    * ```php
    * $auth = new PasswordAuth(
    *   'key',
@@ -125,8 +124,7 @@ class SFAPIClient {
    * Constructs a new SalesForce API client that is scoped to a specific object
    * type. Note that this re-uses the Http client of the SalesForce API client
    * that was used to create the scoped client. Object types passed to the
-   * method are not validated in any way.
-   *
+   * method are not validated in any way. 
    * ```php
    * $contacts = $client->scope('Contact');
    * ```
@@ -261,7 +259,6 @@ class SFAPIClient {
    * returns the results. The results returned may not represent all of the
    * objects in SalesForce that match the given query. Records up to the limit
    * set by SalesForce are returned.
-   *
    * This method runs the provided query as-is and does not perform validation
    * or sanitizion. Consumers of the client should handle these operations prior
    * to passing the query to the client.
@@ -291,7 +288,7 @@ class SFAPIClient {
    * @param string $objectType
    * @param string $id
    * @return string
-   * @internal 
+   * @internal
    */
   public function o(string $objectType, string $id = ''): string {
     return self::OBJECT_API . "/{$objectType}" . ($id ? "/${id}" : '');
