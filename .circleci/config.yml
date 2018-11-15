@@ -55,7 +55,7 @@ jobs:
       - save_cache:
           key: codegen-{{ checksum ".circle-sha" }}
           paths:
-            - ~/project/src/Result
+            - ~/project/src
 
   deploy_to_github:
     docker:
