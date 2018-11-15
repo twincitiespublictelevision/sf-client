@@ -4,7 +4,6 @@ namespace SFClient\Auth;
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use SFClient\Endpoint\Endpoint;
 use function SFClient\ex_json_decode;
 
 /**
