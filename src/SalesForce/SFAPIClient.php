@@ -81,8 +81,10 @@ class SFAPIClient {
 
   /**
    * Constructs a new SalesForce API client with a custom Http client and the
-   * given authentication mechanism. It is expected that the caller has
-   * correctly configured the Http client ahead of time with the appropriate
+   * given authentication mechanism.
+   *
+   * It is expected that the caller has correctly configured the Http client
+   * ahead of time with the appropriate
    * SalesForce base endpoint url.
    * ```php
    * $auth = new PasswordAuth(
@@ -122,9 +124,11 @@ class SFAPIClient {
 
   /**
    * Constructs a new SalesForce API client that is scoped to a specific object
-   * type. Note that this re-uses the Http client of the SalesForce API client
+   * type.
+   *
+   * Note that this re-uses the Http client of the SalesForce API client
    * that was used to create the scoped client. Object types passed to the
-   * method are not validated in any way. 
+   * method are not validated in any way.
    * ```php
    * $contacts = $client->scope('Contact');
    * ```
@@ -167,9 +171,10 @@ class SFAPIClient {
   }
 
   /**
-   * Fetches a single object of a given type. The optional `$fields` argument
-   * may be used to restrict the fields that are returned. By default all
-   * fields are returned.
+   * Fetches a single object of a given type.
+   *
+   * The optional `$fields` argument may be used to restrict the fields that
+   * are returned. By default all fields are returned.
    *
    * @param string $objectType SalesForce object type to query for
    * @param string $id SalesForce object id to query for
@@ -256,9 +261,12 @@ class SFAPIClient {
 
   /**
    * Performs an arbitrary query against the SalesForce query endpoint and
-   * returns the results. The results returned may not represent all of the
-   * objects in SalesForce that match the given query. Records up to the limit
-   * set by SalesForce are returned.
+   * returns the results.
+   *
+   * The results returned may not represent all of the objects in SalesForce
+   * that match the given query. Records up to the limit set by SalesForce are
+   * returned.
+   *
    * This method runs the provided query as-is and does not perform validation
    * or sanitizion. Consumers of the client should handle these operations prior
    * to passing the query to the client.
