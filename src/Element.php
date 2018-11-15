@@ -4,6 +4,10 @@ namespace SFClient;
 
 /**
  * Class Element
+ *
+ * Wrapper class for stdClass that helps make accessing arbitrary
+ * properties safer
+ *
  * @package SalesForce
  */
 class Element {
@@ -24,6 +28,7 @@ class Element {
   /**
    * @param string $name
    * @return bool
+   * @internal
    */
   public function __isset($name) {
     return isset($this->_data) && isset($this->_data->{$name});
@@ -32,6 +37,7 @@ class Element {
   /**
    * @param string $name
    * @return mixed
+   * @internal
    */
   public function __get($name) {
     if (isset($this->{$name})) {
