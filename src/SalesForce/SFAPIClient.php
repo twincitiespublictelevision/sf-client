@@ -202,9 +202,11 @@ class SFAPIClient {
   }
 
   /**
-   * @param string $objectType
-   * @param string $id
-   * @param array $data
+   * Updates a single object of a given type with the given id.
+   *
+   * @param string $objectType SalesForce object type to update
+   * @param string $id SalesForce id type to update
+   * @param array $data Field data to update the object with
    * @return BoolResult
    */
   public function patch(string $objectType, string $id, array $data): BoolResult {
@@ -229,8 +231,10 @@ class SFAPIClient {
   }
 
   /**
-   * @param string $objectType
-   * @param string $id
+   * Deletes a single object of a given type with the given id.
+   *
+   * @param string $objectType SalesForce object type to delete
+   * @param string $id SalesForce id type to delete
    * @return BoolResult
    */
   public function delete(string $objectType, string $id): BoolResult {
@@ -253,7 +257,16 @@ class SFAPIClient {
   }
 
   /**
-   * @param string $query
+   * Performs an arbitrary query against the SalesForce query endpoint and
+   * returns the results. The results returned may not represent all of the
+   * objects in SalesForce that match the given query. Records up to the limit
+   * set by SalesForce are returned.
+   *
+   * This method runs the provided query as-is and does not perform validation
+   * or sanitizion. Consumers of the client should handle these operations prior
+   * to passing the query to the client.
+   *
+   * @param string $query A SOQL query to run
    * @return SFRecordsResult
    */
   public function query(string $query): SFRecordsResult {
@@ -273,17 +286,24 @@ class SFAPIClient {
   }
 
   /**
+   * Helper function for constructing a SalesForce Object REST uri.
+   *
    * @param string $objectType
    * @param string $id
    * @return string
+   * @internal 
    */
   public function o(string $objectType, string $id = ''): string {
     return self::OBJECT_API . "/{$objectType}" . ($id ? "/${id}" : '');
   }
 
   /**
+   * Given an arbitrary request, returns a new request with the client stored
+   * authentication information attached.
+   *
    * @param Request $request
    * @return Request
+   * @internal
    */
   public function authenticatedRequest(Request $request): Request {
 
@@ -299,8 +319,11 @@ class SFAPIClient {
   }
 
   /**
+   * Executes an arbitrary request against the SalesForce API
+   *
    * @param Request $request
    * @return Result
+   * @internal
    */
   public function run(Request $request): Result {
     try {
