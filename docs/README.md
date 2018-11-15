@@ -241,6 +241,18 @@
     * [get](#get)
     * [patch](#patch)
     * [delete](#delete)
+* [SFAPIClient](#sfapiclient)
+    * [connect](#connect)
+    * [connectWith](#connectwith)
+    * [scope](#scope)
+    * [create](#create-1)
+    * [get](#get-1)
+    * [patch](#patch-1)
+    * [delete](#delete-1)
+    * [query](#query)
+    * [o](#o)
+    * [authenticatedRequest](#authenticatedrequest)
+    * [run](#run)
 * [SFCreation](#sfcreation)
     * [__construct](#__construct-4)
     * [getId](#getid)
@@ -5490,6 +5502,302 @@ ScopedSFAPIClient::delete( string $id ): \SFClient\Result\BoolResult
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$id` | **string** |  |
+
+
+
+
+---
+
+## SFAPIClient
+
+Class SFAPIClient
+
+A general purpose client for communicating with the SalesForce API. This
+client only implements the base functionality for handling CRUD operations as
+where as arbitrary query execution.
+
+On construction a client will attempt to authenticate against the supplied
+SalesForce endpoint immediately. An exception will be thrown if this call
+is not successful. At this point the returned token is stored for later use,
+and the credentials for authentication are thrown away.
+
+The client will not attempt to re-authenticate if later API calls generate
+authentication failures. If the client is left in use by a long running
+process that outlives the lifetime of the access token, then this case may
+occur. It is left to the consumer of the client to handle these cases.
+
+* Full name: \SFClient\SalesForce\SFAPIClient
+
+
+### connect
+
+Constructs a new SalesForce API client with a given SalesForce API endpoint
+and authentication mechanism.
+
+```php
+SFAPIClient::connect( \SFClient\Endpoint\Endpoint $endpoint, \SFClient\Auth\Authentication $auth ): \SFClient\SalesForce\SFAPIClient
+```
+
+
+
+* This method is **static**.
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$endpoint` | **\SFClient\Endpoint\Endpoint** | SalesForce endpoint to make calls against |
+| `$auth` | **\SFClient\Auth\Authentication** | SalesForce authentication mechanism |
+
+
+
+
+---
+
+### connectWith
+
+Constructs a new SalesForce API client with a custom Http client and the
+given authentication mechanism. It is expected that the caller has
+correctly configured the Http client ahead of time with the appropriate
+SalesForce base endpoint url.
+
+```php
+SFAPIClient::connectWith( \GuzzleHttp\Client $client, \SFClient\Auth\Authentication $auth ): \SFClient\SalesForce\SFAPIClient
+```
+
+```php
+$auth = new PasswordAuth(
+  'key',
+  'secret',
+  'user',
+  'pass'
+);
+
+$client = new Client([
+  'base_uri' => 'https://my.endpoint.salesforce.com/services/data/v12.3/
+]);
+
+$sfClient = SFAPIClient::connectWith($client, $auth);
+```
+
+* This method is **static**.
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$client` | **\GuzzleHttp\Client** | Http client that will be used by the SFAPIClient to communicate with the SalesForce API |
+| `$auth` | **\SFClient\Auth\Authentication** | SalesForce authentication mechanism |
+
+
+
+
+---
+
+### scope
+
+Constructs a new SalesForce API client that is scoped to a specific object
+type. Note that this re-uses the Http client of the SalesForce API client
+that was used to create the scoped client. Object types passed to the
+method are not validated in any way.
+
+```php
+SFAPIClient::scope( string $objectType ): \SFClient\SalesForce\ScopedSFAPIClient
+```
+
+```php
+$contacts = $client->scope('Contact');
+```
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$objectType` | **string** | SalesForce object type to create a client for |
+
+
+
+
+---
+
+### create
+
+Performs a create operation for a given type.
+
+```php
+SFAPIClient::create( string $objectType, array $data ): \SFClient\Result\SFCreationResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$objectType` | **string** | SalesForce object type to create |
+| `$data` | **array** | Field data to create the object with |
+
+
+
+
+---
+
+### get
+
+Fetches a single object of a given type. The optional `$fields` argument
+may be used to restrict the fields that are returned. By default all
+fields are returned.
+
+```php
+SFAPIClient::get( string $objectType, string $id, array $fields = array() ): \SFClient\Result\SFObjectResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$objectType` | **string** | SalesForce object type to query for |
+| `$id` | **string** | SalesForce object id to query for |
+| `$fields` | **array** | SalesForce fields to return |
+
+
+
+
+---
+
+### patch
+
+
+
+```php
+SFAPIClient::patch( string $objectType, string $id, array $data ): \SFClient\Result\BoolResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$objectType` | **string** |  |
+| `$id` | **string** |  |
+| `$data` | **array** |  |
+
+
+
+
+---
+
+### delete
+
+
+
+```php
+SFAPIClient::delete( string $objectType, string $id ): \SFClient\Result\BoolResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$objectType` | **string** |  |
+| `$id` | **string** |  |
+
+
+
+
+---
+
+### query
+
+
+
+```php
+SFAPIClient::query( string $query ): \SFClient\Result\SFRecordsResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$query` | **string** |  |
+
+
+
+
+---
+
+### o
+
+
+
+```php
+SFAPIClient::o( string $objectType, string $id = &#039;&#039; ): string
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$objectType` | **string** |  |
+| `$id` | **string** |  |
+
+
+
+
+---
+
+### authenticatedRequest
+
+
+
+```php
+SFAPIClient::authenticatedRequest( \GuzzleHttp\Psr7\Request $request ): \GuzzleHttp\Psr7\Request
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$request` | **\GuzzleHttp\Psr7\Request** |  |
+
+
+
+
+---
+
+### run
+
+
+
+```php
+SFAPIClient::run( \GuzzleHttp\Psr7\Request $request ): \SFClient\Result\Result
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$request` | **\GuzzleHttp\Psr7\Request** |  |
 
 
 
