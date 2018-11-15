@@ -35,7 +35,7 @@ class SFRecords {
    * * bool done
    * * array records
    *
-   * @param \stdClass $data
+   * @param \stdClass $data A successful response object from SalesForce
    */
   public function __construct(\stdClass $data) {
     if (!isset($data->totalSize)) {

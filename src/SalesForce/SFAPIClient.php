@@ -21,11 +21,25 @@ use SFClient\Result\Result;
 
 /**
  * Class SFClient
+ *
+ * A general purpose client for communicating with the SalesForce API. This
+ * client only implements the base functionality for handling CRUD operations as
+ * where as arbitrary query execution.
+ *
+ * On construction a client will attempt to authenticate against the supplied
+ * SalesForce endpoint immediately. An exception will be thrown if this call
+ * is not successful. At this point the returned token is stored for later use,
+ * and the credentials for authentication are thrown away.
+ *
+ * The client will not attempt to re-authenticate if later API calls generate
+ * authentication failures. If the client is left in use by a long running
+ * process that outlives the lifetime of the access token, then this case may
+ * occur. It is left to the consumer of the client to handle these cases.
+ *
  * @package SFClient\SalesForce
  */
 class SFAPIClient {
-
-  const OBJECT_API = 'sobjects';
+  protected const OBJECT_API = 'sobjects';
 
   /**
    * @var Client
@@ -48,8 +62,11 @@ class SFAPIClient {
   }
 
   /**
-   * @param Endpoint $endpoint
-   * @param Authentication $auth
+   * Constructs a new SalesForce API client with a given SalesForce API endpoint
+   * and authentication mechanism.
+   *
+   * @param Endpoint $endpoint SalesForce endpoint to make calls against
+   * @param Authentication $auth SalesForce authentication mechanism
    * @return SFAPIClient
    * @throws FailedToAuthenticate
    * @throws \GuzzleHttp\Exception\GuzzleException
@@ -63,8 +80,28 @@ class SFAPIClient {
   }
 
   /**
-   * @param Client $client
-   * @param Authentication $auth
+   * Constructs a new SalesForce API client with a custom Http client and the
+   * given authentication mechanism. It is expected that the caller has
+   * correctly configured the Http client ahead of time with the appropriate
+   * SalesForce base endpoint url.
+   *
+   * ```php
+   * $auth = new PasswordAuth(
+   *   'key',
+   *   'secret',
+   *   'user',
+   *   'pass'
+   * );
+   *
+   * $client = new Client([
+   *   'base_uri' => 'https://my.endpoint.salesforce.com/services/data/v12.3/
+   * ]);
+   *
+   * $sfClient = SFAPIClient::connectWith($client, $auth);
+   * ```
+   *
+   * @param Client $client Http client that will be used by the SFAPIClient to communicate with the SalesForce API
+   * @param Authentication $auth SalesForce authentication mechanism
    * @return SFAPIClient
    * @throws FailedToAuthenticate
    * @throws \GuzzleHttp\Exception\GuzzleException
@@ -85,7 +122,16 @@ class SFAPIClient {
   }
 
   /**
-   * @param string $objectType
+   * Constructs a new SalesForce API client that is scoped to a specific object
+   * type. Note that this re-uses the Http client of the SalesForce API client
+   * that was used to create the scoped client. Object types passed to the
+   * method are not validated in any way.
+   *
+   * ```php
+   * $contacts = $client->scope('Contact');
+   * ```
+   *
+   * @param string $objectType SalesForce object type to create a client for
    * @return ScopedSFAPIClient
    */
   public function scope(string $objectType): ScopedSFAPIClient {
@@ -93,8 +139,10 @@ class SFAPIClient {
   }
 
   /**
-   * @param string $objectType
-   * @param array $data
+   * Performs a create operation for a given type.
+   *
+   * @param string $objectType SalesForce object type to create
+   * @param array $data Field data to create the object with
    * @return SFCreationResult
    */
   public function create(string $objectType, array $data): SFCreationResult {
@@ -121,9 +169,13 @@ class SFAPIClient {
   }
 
   /**
-   * @param string $objectType
-   * @param string $id
-   * @param array $fields
+   * Fetches a single object of a given type. The optional `$fields` argument
+   * may be used to restrict the fields that are returned. By default all
+   * fields are returned.
+   *
+   * @param string $objectType SalesForce object type to query for
+   * @param string $id SalesForce object id to query for
+   * @param array $fields SalesForce fields to return
    * @return SFObjectResult
    */
   public function get(string $objectType, string $id, array $fields = []): SFObjectResult {

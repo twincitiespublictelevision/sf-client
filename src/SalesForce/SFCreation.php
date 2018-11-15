@@ -4,6 +4,9 @@ namespace SFClient\SalesForce;
 
 /**
  * Class SFCreation
+ *
+ * Represents an object create response from SalesForce.
+ *
  * @package SFClient\SalesForce
  */
 class SFCreation {
@@ -23,6 +26,16 @@ class SFCreation {
    */
   protected $_errors;
 
+  /**
+   * SFCreation constructor.
+   *
+   * Requires the $data argument to contain specific properties:
+   * * string id
+   * * bool success
+   * * array errors
+   *
+   * @param \stdClass $data A successful create response object from SalesForce
+   */
   public function __construct(\stdClass $data) {
     if (!isset($data->id)) {
       throw new \InvalidArgumentException('Data is missing an id property.');
