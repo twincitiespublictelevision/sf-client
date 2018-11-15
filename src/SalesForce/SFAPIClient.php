@@ -20,7 +20,7 @@ use SFClient\Exceptions\FailedToAuthenticate;
 use SFClient\Result\Result;
 
 /**
- * Class SFClient
+ * Class SFAPIClient
  *
  * A general purpose client for communicating with the SalesForce API. This
  * client only implements the base functionality for handling CRUD operations as

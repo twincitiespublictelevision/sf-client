@@ -8,7 +8,7 @@ use SFClient\Result\SFCreationResult;
 use SFClient\Result\SFObjectResult;
 
 /**
- * Class ScopedSFClient
+ * Class ScopedSFAPIClient
  * @package SFClient\SalesForce
  */
 class ScopedSFAPIClient {
