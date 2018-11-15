@@ -9,7 +9,9 @@ list(
   $nullablePrimitiveTemplate
 ) = require __DIR__ . DIRECTORY_SEPARATOR . 'GenerateResultClasses.php';
 
-function write(string $class, string $code, string $directory) {
+$writeDocs = require_once __DIR__ . DIRECTORY_SEPARATOR . 'GenerateClientMethodDocs.php';
+
+function writeClass(string $class, string $code, string $directory) {
   $path = $directory . $class . 'Result.php';
 
   if ($dir = dirname($path)) {
@@ -28,8 +30,8 @@ function write(string $class, string $code, string $directory) {
 $config = [
   ['SFClient\Result', 'SFClient\SalesForce', 'SFCreation', $classTemplate],
   ['SFClient\Result', 'SFClient\SalesForce', 'SFObject', $nullableClassTemplate],
-  ['SFClient\Result', 'SFClient\SalesForce', 'SFRecords', $classTemplate]
-//  ['bool', $primitiveTemplate]
+  ['SFClient\Result', 'SFClient\SalesForce', 'SFRecords', $classTemplate],
+  ['SFClient\Result', '', 'bool', $primitiveTemplate]
 ];
 
 $dir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '/src/Result/';
@@ -37,5 +39,7 @@ $dir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '/src/Result
 foreach ($config as $i => $elem) {
   list($ns, $path, $class, $template) = $elem;
 
-  write(ucfirst($class), $template($ns, $path, $class), $dir);
+  writeClass(ucfirst($class), $template($ns, $path, $class), $dir);
 }
+
+$writeDocs();

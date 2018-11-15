@@ -17,9 +17,9 @@ use SFClient\Result\SFRecordsResult;
 use SFClient\SalesForce\SFCreation;
 use SFClient\SalesForce\SFObject;
 use SFClient\SalesForce\SFRecords;
-use SFClient\SFClient;
+use SFClient\SalesForce\SFAPIClient;
 
-class SFClientTest extends TestCase {
+class SFAPIClientTest extends TestCase {
   public function fixtures() {
     $auth = $this->getMockBuilder(PasswordAuth::class)
       ->disableOriginalConstructor()
@@ -41,7 +41,7 @@ class SFClientTest extends TestCase {
       ->method('send')
       ->willReturn(new Response());
 
-    SFClient::connectWith($client, $auth);
+    SFAPIClient::connectWith($client, $auth);
   }
 
   public function testConstructionThrowsIfAuthenticationFails() {
@@ -55,7 +55,7 @@ class SFClientTest extends TestCase {
       ->method('send')
       ->willReturn(new Response());
 
-    SFClient::connectWith($client, $auth);
+    SFAPIClient::connectWith($client, $auth);
   }
 
   public function testScopesToObjectType() {
@@ -67,7 +67,7 @@ class SFClientTest extends TestCase {
       ->method('send')
       ->willReturn(new Response());
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
     $scoped = $sf->scope('testType');
 
     $this->assertEquals('testType', $scoped->getScope());
@@ -82,7 +82,7 @@ class SFClientTest extends TestCase {
       ->method('send')
       ->willReturn(new Response());
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $req = $sf->authenticatedRequest(new Request('GET', '/'));
 
@@ -98,7 +98,7 @@ class SFClientTest extends TestCase {
       ->method('send')
       ->willReturn(new Response());
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals('sobjects/testType', $sf->o('testType'));
     $this->assertEquals('sobjects/testType/12345', $sf->o('testType', '12345'));
@@ -119,7 +119,7 @@ class SFClientTest extends TestCase {
       )
       ->willReturn(new Response());
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $sf->run(new Request('GET', '/'));
   }
@@ -143,7 +143,7 @@ class SFClientTest extends TestCase {
         })
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(Result::err($error), $sf->run(new Request('GET', '/')));
   }
@@ -159,7 +159,7 @@ class SFClientTest extends TestCase {
         new Response(200, [], '{"message": "ok"}')
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(
       Result::ok(json_decode('{"message": "ok"}')),
@@ -190,7 +190,7 @@ class SFClientTest extends TestCase {
         })
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(SFCreationResult::err($error), $sf->create('testType', ['key' => 'value']));
   }
@@ -208,7 +208,7 @@ class SFClientTest extends TestCase {
         new Response(200, [], $body)
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(
       SFCreationResult::ok(new SFCreation(json_decode($body))),
@@ -229,7 +229,7 @@ class SFClientTest extends TestCase {
         new Response(200, [], $body)
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $result = $sf->create('testType', ['key' => 'value']);
 
@@ -260,7 +260,7 @@ class SFClientTest extends TestCase {
         })
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(SFObjectResult::err($error), $sf->get('testType', '12345'));
   }
@@ -284,7 +284,7 @@ class SFClientTest extends TestCase {
         })
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(SFObjectResult::ok(null), $sf->get('testType', '12345'));
   }
@@ -302,7 +302,7 @@ class SFClientTest extends TestCase {
         new Response(200, [], $body)
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(
       SFObjectResult::ok(new SFObject(json_decode($body))),
@@ -323,7 +323,7 @@ class SFClientTest extends TestCase {
         new Response(200, [], $body)
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $result = $sf->get('testType','12345');
 
@@ -354,7 +354,7 @@ class SFClientTest extends TestCase {
         })
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(BoolResult::err($error), $sf->patch('testType', '12345', ['key' => 'value']));
   }
@@ -370,7 +370,7 @@ class SFClientTest extends TestCase {
         new Response(200)
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(
       BoolResult::ok(true),
@@ -391,7 +391,7 @@ class SFClientTest extends TestCase {
         new Response(200, [], $body)
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(
       BoolResult::ok(false),
@@ -422,7 +422,7 @@ class SFClientTest extends TestCase {
         })
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(BoolResult::err($error), $sf->delete('testType', '12345'));
   }
@@ -438,7 +438,7 @@ class SFClientTest extends TestCase {
         new Response(200)
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(
       BoolResult::ok(true),
@@ -459,7 +459,7 @@ class SFClientTest extends TestCase {
         new Response(200, [], $body)
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(
       BoolResult::ok(false),
@@ -489,7 +489,7 @@ class SFClientTest extends TestCase {
         new Response(200, [], '{"totalSize": 5, "done": false, "records": [{"Id": "12355"}]}')
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $sf->query('SELECT Id FROM CONTACTS LIMIT 1');
   }
@@ -513,7 +513,7 @@ class SFClientTest extends TestCase {
         })
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(SFRecordsResult::err($error), $sf->query('SELECT Id FROM CONTACTS LIMIT 1'));
   }
@@ -531,7 +531,7 @@ class SFClientTest extends TestCase {
         new Response(200, [], $body)
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $this->assertEquals(
       SFRecordsResult::ok(new SFRecords(json_decode($body))),
@@ -552,7 +552,7 @@ class SFClientTest extends TestCase {
         new Response(200, [], $body)
       );
 
-    $sf = SFClient::connectWith($client, $auth);
+    $sf = SFAPIClient::connectWith($client, $auth);
 
     $result = $sf->query('SELECT Id FROM CONTACTS LIMIT 1');
 

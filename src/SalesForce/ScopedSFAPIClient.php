@@ -1,6 +1,6 @@
 <?php
 
-namespace SFClient;
+namespace SFClient\SalesForce;
 
 use GuzzleHttp\Client;
 use SFClient\Result\BoolResult;
@@ -9,12 +9,12 @@ use SFClient\Result\SFObjectResult;
 
 /**
  * Class ScopedSFClient
- * @package SFClient
+ * @package SFClient\SalesForce
  */
-class ScopedSFClient {
+class ScopedSFAPIClient {
 
   /**
-   * @var SFClient
+   * @var SFAPIClient
    */
   protected $_client;
 
@@ -28,7 +28,7 @@ class ScopedSFClient {
    * @param Client $client
    * @param string $objectScope
    */
-  public function __construct(SFClient $client, string $objectScope) {
+  public function __construct(SFAPIClient $client, string $objectScope) {
     $this->_client = $client;
     $this->_scope = $objectScope;
   }
@@ -48,12 +48,14 @@ class ScopedSFClient {
     return $this->_client->create($this->_scope, $data);
   }
 
+
   /**
    * @param string $id
+   * @param array $fields
    * @return SFObjectResult
    */
-  public function get(string $id): SFObjectResult {
-    return $this->_client->get($this->_scope, $id);
+  public function get(string $id, array $fields = []): SFObjectResult {
+    return $this->_client->get($this->_scope, $id, $fields);
   }
 
   /**

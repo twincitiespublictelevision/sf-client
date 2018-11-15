@@ -25,7 +25,7 @@ $nullableClassTemplate = (function($template) {
 })(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'OptionalResult.php.tmpl'));
 
 $primitiveTemplate = (function($template) {
-  return function($ns, $primitive) use ($template) {
+  return function($ns, $path, $primitive) use ($template) {
     $class = ucfirst($primitive);
 
     $res = $template;
@@ -38,7 +38,7 @@ $primitiveTemplate = (function($template) {
 })(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'PrimitiveResult.php.tmpl'));
 
 $nullablePrimitiveTemplate = (function($template) {
-  return function($ns, $primitive) use ($template) {
+  return function($ns, $path, $primitive) use ($template) {
     $class = ucfirst($primitive);
 
     $res = $template;

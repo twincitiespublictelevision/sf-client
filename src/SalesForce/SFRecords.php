@@ -4,7 +4,7 @@ namespace SFClient\SalesForce;
 
 /**
  * Class SFRecords
- * @package SalesForce
+ * @package SFClient\SalesForce
  */
 class SFRecords {
 

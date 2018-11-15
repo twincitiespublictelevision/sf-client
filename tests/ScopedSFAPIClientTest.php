@@ -6,12 +6,12 @@ use PHPUnit\Framework\TestCase;
 use SFClient\Result\BoolResult;
 use SFClient\Result\SFCreationResult;
 use SFClient\Result\SFObjectResult;
-use SFClient\ScopedSFClient;
-use SFClient\SFClient;
+use SFClient\SalesForce\ScopedSFAPIClient;
+use SFClient\SalesForce\SFAPIClient;
 
-class ScopedSFClientTest extends TestCase {
+class ScopedSFAPIClientTest extends TestCase {
   public function fixture() {
-    $client = $this->getMockBuilder(SFClient::class)
+    $client = $this->getMockBuilder(SFAPIClient::class)
       ->disableOriginalConstructor()
       ->getMock();
 
@@ -28,7 +28,7 @@ class ScopedSFClientTest extends TestCase {
       ->with('testType', ['key' => 'value'])
       ->willReturn($res);
 
-    $scoped = new ScopedSFClient($client, 'testType');
+    $scoped = new ScopedSFAPIClient($client, 'testType');
     $this->assertEquals($res, $scoped->create(['key' => 'value']));
   }
 
@@ -42,7 +42,7 @@ class ScopedSFClientTest extends TestCase {
       ->with('testType', 'id')
       ->willReturn($res);
 
-    $scoped = new ScopedSFClient($client, 'testType');
+    $scoped = new ScopedSFAPIClient($client, 'testType');
     $this->assertEquals($res, $scoped->get('id'));
   }
 
@@ -56,7 +56,7 @@ class ScopedSFClientTest extends TestCase {
       ->with('testType', 'id', ['key' => 'value'])
       ->willReturn($res);
 
-    $scoped = new ScopedSFClient($client, 'testType');
+    $scoped = new ScopedSFAPIClient($client, 'testType');
     $this->assertEquals($res, $scoped->patch('id', ['key' => 'value']));
   }
 
@@ -70,7 +70,7 @@ class ScopedSFClientTest extends TestCase {
       ->with('testType', 'id')
       ->willReturn($res);
 
-    $scoped = new ScopedSFClient($client, 'testType');
+    $scoped = new ScopedSFAPIClient($client, 'testType');
     $this->assertEquals($res, $scoped->delete('id'));
   }
 }

@@ -1,10 +1,12 @@
 <?php
 
-namespace SFClient;
+namespace SFClient\SalesForce;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
+use function SFClient\ex_json_decode;
+use function SFClient\ex_json_encode;
 use SFClient\Result\BoolResult;
 use SFClient\Result\SFCreationResult;
 use SFClient\Result\SFObjectResult;
@@ -19,9 +21,9 @@ use SFClient\Result\Result;
 
 /**
  * Class SFClient
- * @package SFClient
+ * @package SFClient\SalesForce
  */
-class SFClient {
+class SFAPIClient {
 
   const OBJECT_API = 'sobjects';
 
@@ -48,11 +50,11 @@ class SFClient {
   /**
    * @param Endpoint $endpoint
    * @param Authentication $auth
-   * @return SFClient
+   * @return SFAPIClient
    * @throws FailedToAuthenticate
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public static function connect(Endpoint $endpoint, Authentication $auth): SFClient {
+  public static function connect(Endpoint $endpoint, Authentication $auth): SFAPIClient {
     $client = new Client([
       'base_uri' => $endpoint->getUrl()
     ]);
@@ -63,11 +65,11 @@ class SFClient {
   /**
    * @param Client $client
    * @param Authentication $auth
-   * @return SFClient
+   * @return SFAPIClient
    * @throws FailedToAuthenticate
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public static function connectWith(Client $client, Authentication $auth): SFClient {
+  public static function connectWith(Client $client, Authentication $auth): SFAPIClient {
     $token = $auth->getTokenFromResponse(
       $client->send($auth->getTokenRequest())
     );
@@ -76,7 +78,7 @@ class SFClient {
       throw new FailedToAuthenticate();
     }
 
-    return new SFClient(
+    return new SFAPIClient(
       $client,
       $token
     );
@@ -84,10 +86,10 @@ class SFClient {
 
   /**
    * @param string $objectType
-   * @return ScopedSFClient
+   * @return ScopedSFAPIClient
    */
-  public function scope(string $objectType): ScopedSFClient {
-    return new ScopedSFClient($this, $objectType);
+  public function scope(string $objectType): ScopedSFAPIClient {
+    return new ScopedSFAPIClient($this, $objectType);
   }
 
   /**
@@ -121,10 +123,12 @@ class SFClient {
   /**
    * @param string $objectType
    * @param string $id
+   * @param array $fields
    * @return SFObjectResult
    */
-  public function get(string $objectType, string $id): SFObjectResult {
-    $result = $this->run(new Request('GET', $this->o($objectType, $id)));
+  public function get(string $objectType, string $id, array $fields = []): SFObjectResult {
+    $fieldQuery = empty($fields) ? '' : '?' . implode(',', $fields);
+    $result = $this->run(new Request('GET', $this->o($objectType, $id) . $fieldQuery));
 
     if ($result->isError()) {
       $error = $result->getErr();

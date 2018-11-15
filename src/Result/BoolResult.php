@@ -2,6 +2,8 @@
 
 namespace SFClient\Result;
 
+use SFClient\Result\Result;
+
 /**
  * Class BoolResult
  * @package SFClient\Result
