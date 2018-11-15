@@ -241,18 +241,6 @@
     * [get](#get)
     * [patch](#patch)
     * [delete](#delete)
-* [SFAPIClient](#sfapiclient)
-    * [connect](#connect)
-    * [connectWith](#connectwith)
-    * [scope](#scope)
-    * [create](#create-1)
-    * [get](#get-1)
-    * [patch](#patch-1)
-    * [delete](#delete-1)
-    * [query](#query)
-    * [o](#o)
-    * [authenticatedRequest](#authenticatedrequest)
-    * [run](#run)
 * [SFCreation](#sfcreation)
     * [__construct](#__construct-4)
     * [getId](#getid)
@@ -5508,291 +5496,34 @@ ScopedSFAPIClient::delete( string $id ): \SFClient\Result\BoolResult
 
 ---
 
-## SFAPIClient
-
-Class SFClient
-
-
-
-* Full name: \SFClient\SalesForce\SFAPIClient
-
-
-### connect
-
-
-
-```php
-SFAPIClient::connect( \SFClient\Endpoint\Endpoint $endpoint, \SFClient\Auth\Authentication $auth ): \SFClient\SalesForce\SFAPIClient
-```
-
-
-
-* This method is **static**.
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$endpoint` | **\SFClient\Endpoint\Endpoint** |  |
-| `$auth` | **\SFClient\Auth\Authentication** |  |
-
-
-
-
----
-
-### connectWith
-
-
-
-```php
-SFAPIClient::connectWith( \GuzzleHttp\Client $client, \SFClient\Auth\Authentication $auth ): \SFClient\SalesForce\SFAPIClient
-```
-
-
-
-* This method is **static**.
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$client` | **\GuzzleHttp\Client** |  |
-| `$auth` | **\SFClient\Auth\Authentication** |  |
-
-
-
-
----
-
-### scope
-
-
-
-```php
-SFAPIClient::scope( string $objectType ): \SFClient\SalesForce\ScopedSFAPIClient
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$objectType` | **string** |  |
-
-
-
-
----
-
-### create
-
-
-
-```php
-SFAPIClient::create( string $objectType, array $data ): \SFClient\Result\SFCreationResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$objectType` | **string** |  |
-| `$data` | **array** |  |
-
-
-
-
----
-
-### get
-
-
-
-```php
-SFAPIClient::get( string $objectType, string $id, array $fields = array() ): \SFClient\Result\SFObjectResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$objectType` | **string** |  |
-| `$id` | **string** |  |
-| `$fields` | **array** |  |
-
-
-
-
----
-
-### patch
-
-
-
-```php
-SFAPIClient::patch( string $objectType, string $id, array $data ): \SFClient\Result\BoolResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$objectType` | **string** |  |
-| `$id` | **string** |  |
-| `$data` | **array** |  |
-
-
-
-
----
-
-### delete
-
-
-
-```php
-SFAPIClient::delete( string $objectType, string $id ): \SFClient\Result\BoolResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$objectType` | **string** |  |
-| `$id` | **string** |  |
-
-
-
-
----
-
-### query
-
-
-
-```php
-SFAPIClient::query( string $query ): \SFClient\Result\SFRecordsResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$query` | **string** |  |
-
-
-
-
----
-
-### o
-
-
-
-```php
-SFAPIClient::o( string $objectType, string $id = &#039;&#039; ): string
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$objectType` | **string** |  |
-| `$id` | **string** |  |
-
-
-
-
----
-
-### authenticatedRequest
-
-
-
-```php
-SFAPIClient::authenticatedRequest( \GuzzleHttp\Psr7\Request $request ): \GuzzleHttp\Psr7\Request
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$request` | **\GuzzleHttp\Psr7\Request** |  |
-
-
-
-
----
-
-### run
-
-
-
-```php
-SFAPIClient::run( \GuzzleHttp\Psr7\Request $request ): \SFClient\Result\Result
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$request` | **\GuzzleHttp\Psr7\Request** |  |
-
-
-
-
----
-
 ## SFCreation
 
 Class SFCreation
 
-
+Represents an object create response from SalesForce.
 
 * Full name: \SFClient\SalesForce\SFCreation
 
 
 ### __construct
 
-
+SFCreation constructor.
 
 ```php
 SFCreation::__construct( \stdClass $data )
 ```
 
-
+Requires the $data argument to contain specific properties:
+* string id
+* bool success
+* array errors
 
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$data` | **\stdClass** |  |
+| `$data` | **\stdClass** | A successful create response object from SalesForce |
 
 
 
@@ -6018,6 +5749,9 @@ properties safer
 * Full name: \SFClient\SalesForce\SFObject
 * Parent class: \SFClient\Element
 
+**See Also:**
+
+* \SFClient\SalesForce\Element 
 
 ### __construct
 
@@ -6069,7 +5803,7 @@ Requires the $data argument to contain specific properties:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$data` | **\stdClass** |  |
+| `$data` | **\stdClass** | A successful response object from SalesForce |
 
 
 
