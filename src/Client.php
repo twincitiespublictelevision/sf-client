@@ -5,6 +5,7 @@ namespace SFClient;
 use SFClient\Result\BoolResult;
 use SFClient\Result\SFCreationResult;
 use SFClient\Result\SFObjectResult;
+use SFClient\Result\SFRecordsResult;
 use SFClient\SalesForce\SFAPIClient;
 
 /**
@@ -149,12 +150,26 @@ class Client {
   protected $_types;
 
   /**
+   * @var array
+   */
+  protected $_typeNames;
+
+  /**
    * Client constructor.
    * @param SFAPIClient $client
    */
   public function __construct(SFAPIClient $client) {
     $this->_client = $client;
     $this->_types = require __DIR__ . '/SalesForce/ObjectTypes.php';
+    $this->_typeNames = array_keys($this->_types);
+  }
+
+  /**
+   * @param string $query
+   * @return SFRecordsResult
+   */
+  public function search(string $query): SFRecordsResult {
+    return $this->_client->query($query);
   }
 
   /**
@@ -165,7 +180,7 @@ class Client {
     if ($parts = $this->getRESTParts($name)) {
       list($method, $type) = $parts;
 
-      $this->_client->scope($type)->{$method}(...$arguments);
+      $this->_client->scope($this->_types[$type])->{$method}(...$arguments);
     }
   }
 
@@ -180,7 +195,7 @@ class Client {
       if (strpos($name, $method) === 0) {
         $type = str_replace($method, '', $name);
 
-        if (in_array($type, $this->_types)) {
+        if (in_array($type, $this->_typeNames)) {
           return [$method, $type];
         }
       }

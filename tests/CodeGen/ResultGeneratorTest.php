@@ -70,7 +70,7 @@ class ResultGeneratorTest extends TestCase {
   public function testGeneratesPrimitiveResult() {
     list($_, $_, $primitiveTemplate, $_) = $this->fixtures();
 
-    eval('?>' . $primitiveTemplate('Tests', 'bool'));
+    eval('?>' . $primitiveTemplate('Tests', '', 'bool'));
 
     $okTest = BoolResult::ok(5);
     $errTest = BoolResult::err(new \Exception('IsError'));
@@ -94,7 +94,7 @@ class ResultGeneratorTest extends TestCase {
   public function testGeneratesOptionalPrimitiveResult() {
     list($_, $_, $_, $nullablePrimitiveTemplate) = $this->fixtures();
 
-    eval('?>' . $nullablePrimitiveTemplate('Tests', 'int'));
+    eval('?>' . $nullablePrimitiveTemplate('Tests', '', 'int'));
 
     $okTest = IntResult::ok(5);
     $nullTest = IntResult::ok(null);
