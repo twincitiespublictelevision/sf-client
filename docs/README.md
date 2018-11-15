@@ -3820,7 +3820,7 @@ Endpoint::getUrl(  ): string
 
 ## FailedToAuthenticate
 
-
+Class FailedToAuthenticate
 
 
 
