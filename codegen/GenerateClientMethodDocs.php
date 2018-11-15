@@ -27,7 +27,7 @@ $write = function($classPath, $types) use ($gen) {
     preg_replace(
       '/<C>/',
       $class,
-      preg_replace('/\/\*\*[\s\S]+?\*\//', $clientDocs, $clientClass, 1)
+      preg_replace('/ \* @package SFClient[\s\S]+?\*\//', $clientDocs, $clientClass, 1)
     )
   );
 };
