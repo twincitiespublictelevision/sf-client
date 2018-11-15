@@ -39,7 +39,7 @@ use SFClient\Result\Result;
  * @package SFClient\SalesForce
  */
 class SFAPIClient {
-  protected const OBJECT_API = 'sobjects';
+  const OBJECT_API = 'sobjects';
 
   /**
    * @var Client
