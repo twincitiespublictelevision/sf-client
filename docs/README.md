@@ -250,9 +250,6 @@
     * [patch](#patch-1)
     * [delete](#delete-1)
     * [query](#query)
-    * [o](#o)
-    * [authenticatedRequest](#authenticatedrequest)
-    * [run](#run)
 * [SFCreation](#sfcreation)
     * [__construct](#__construct-4)
     * [getId](#getid)
@@ -5670,7 +5667,7 @@ SFAPIClient::get( string $objectType, string $id, array $fields = array() ): \SF
 
 ### patch
 
-
+Updates a single object of a given type with the given id.
 
 ```php
 SFAPIClient::patch( string $objectType, string $id, array $data ): \SFClient\Result\BoolResult
@@ -5683,9 +5680,9 @@ SFAPIClient::patch( string $objectType, string $id, array $data ): \SFClient\Res
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$objectType` | **string** |  |
-| `$id` | **string** |  |
-| `$data` | **array** |  |
+| `$objectType` | **string** | SalesForce object type to update |
+| `$id` | **string** | SalesForce id type to update |
+| `$data` | **array** | Field data to update the object with |
 
 
 
@@ -5694,7 +5691,7 @@ SFAPIClient::patch( string $objectType, string $id, array $data ): \SFClient\Res
 
 ### delete
 
-
+Deletes a single object of a given type with the given id.
 
 ```php
 SFAPIClient::delete( string $objectType, string $id ): \SFClient\Result\BoolResult
@@ -5707,8 +5704,8 @@ SFAPIClient::delete( string $objectType, string $id ): \SFClient\Result\BoolResu
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$objectType` | **string** |  |
-| `$id` | **string** |  |
+| `$objectType` | **string** | SalesForce object type to delete |
+| `$id` | **string** | SalesForce id type to delete |
 
 
 
@@ -5717,87 +5714,25 @@ SFAPIClient::delete( string $objectType, string $id ): \SFClient\Result\BoolResu
 
 ### query
 
-
+Performs an arbitrary query against the SalesForce query endpoint and
+returns the results. The results returned may not represent all of the
+objects in SalesForce that match the given query. Records up to the limit
+set by SalesForce are returned.
 
 ```php
 SFAPIClient::query( string $query ): \SFClient\Result\SFRecordsResult
 ```
 
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$query` | **string** |  |
-
-
-
-
----
-
-### o
-
-
-
-```php
-SFAPIClient::o( string $objectType, string $id = &#039;&#039; ): string
-```
-
-
+This method runs the provided query as-is and does not perform validation
+or sanitizion. Consumers of the client should handle these operations prior
+to passing the query to the client.
 
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$objectType` | **string** |  |
-| `$id` | **string** |  |
-
-
-
-
----
-
-### authenticatedRequest
-
-
-
-```php
-SFAPIClient::authenticatedRequest( \GuzzleHttp\Psr7\Request $request ): \GuzzleHttp\Psr7\Request
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$request` | **\GuzzleHttp\Psr7\Request** |  |
-
-
-
-
----
-
-### run
-
-
-
-```php
-SFAPIClient::run( \GuzzleHttp\Psr7\Request $request ): \SFClient\Result\Result
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$request` | **\GuzzleHttp\Psr7\Request** |  |
+| `$query` | **string** | A SOQL query to run |
 
 
 
