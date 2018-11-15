@@ -5553,14 +5553,15 @@ SFAPIClient::connect( \SFClient\Endpoint\Endpoint $endpoint, \SFClient\Auth\Auth
 ### connectWith
 
 Constructs a new SalesForce API client with a custom Http client and the
-given authentication mechanism. It is expected that the caller has
-correctly configured the Http client ahead of time with the appropriate
-SalesForce base endpoint url.
+given authentication mechanism.
 
 ```php
 SFAPIClient::connectWith( \GuzzleHttp\Client $client, \SFClient\Auth\Authentication $auth ): \SFClient\SalesForce\SFAPIClient
 ```
 
+It is expected that the caller has correctly configured the Http client
+ahead of time with the appropriate
+SalesForce base endpoint url.
 ```php
 $auth = new PasswordAuth(
   'key',
@@ -5592,14 +5593,15 @@ $sfClient = SFAPIClient::connectWith($client, $auth);
 ### scope
 
 Constructs a new SalesForce API client that is scoped to a specific object
-type. Note that this re-uses the Http client of the SalesForce API client
-that was used to create the scoped client. Object types passed to the
-method are not validated in any way.
+type.
 
 ```php
 SFAPIClient::scope( string $objectType ): \SFClient\SalesForce\ScopedSFAPIClient
 ```
 
+Note that this re-uses the Http client of the SalesForce API client
+that was used to create the scoped client. Object types passed to the
+method are not validated in any way.
 ```php
 $contacts = $client->scope('Contact');
 ```
@@ -5641,15 +5643,14 @@ SFAPIClient::create( string $objectType, array $data ): \SFClient\Result\SFCreat
 
 ### get
 
-Fetches a single object of a given type. The optional `$fields` argument
-may be used to restrict the fields that are returned. By default all
-fields are returned.
+Fetches a single object of a given type.
 
 ```php
 SFAPIClient::get( string $objectType, string $id, array $fields = array() ): \SFClient\Result\SFObjectResult
 ```
 
-
+The optional `$fields` argument may be used to restrict the fields that
+are returned. By default all fields are returned.
 
 
 **Parameters:**
@@ -5715,13 +5716,15 @@ SFAPIClient::delete( string $objectType, string $id ): \SFClient\Result\BoolResu
 ### query
 
 Performs an arbitrary query against the SalesForce query endpoint and
-returns the results. The results returned may not represent all of the
-objects in SalesForce that match the given query. Records up to the limit
-set by SalesForce are returned.
+returns the results.
 
 ```php
 SFAPIClient::query( string $query ): \SFClient\Result\SFRecordsResult
 ```
+
+The results returned may not represent all of the objects in SalesForce
+that match the given query. Records up to the limit set by SalesForce are
+returned.
 
 This method runs the provided query as-is and does not perform validation
 or sanitizion. Consumers of the client should handle these operations prior
