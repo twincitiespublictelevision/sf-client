@@ -5232,14 +5232,15 @@ NPSPClient::deleteUserProvisioningRequest( string $id ): \SFClient\Result\BoolRe
 
 Class Result
 
-
+A successful or failure to perform some operation. Used as an alternative
+to raising exceptions when needing to propagate errors.
 
 * Full name: \SFClient\Result\Result
 
 
 ### ok
 
-
+Constructs a successful result of some type T.
 
 ```php
 Result::ok( mixed $value ): \SFClient\Result\Result
@@ -5252,7 +5253,7 @@ Result::ok( mixed $value ): \SFClient\Result\Result
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$value` | **mixed** |  |
+| `$value` | **mixed** | The success value |
 
 
 
@@ -5261,7 +5262,8 @@ Result::ok( mixed $value ): \SFClient\Result\Result
 
 ### err
 
-
+Constructs a failure result of some error type E. To construct a failure
+an exception must be supplied.
 
 ```php
 Result::err( \Exception $err ): \SFClient\Result\Result
@@ -5274,7 +5276,7 @@ Result::err( \Exception $err ): \SFClient\Result\Result
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$err` | **\Exception** |  |
+| `$err` | **\Exception** | The failure error |
 
 
 
@@ -5283,7 +5285,7 @@ Result::err( \Exception $err ): \SFClient\Result\Result
 
 ### isError
 
-
+Returns true if the result is a failure
 
 ```php
 Result::isError(  ): boolean
@@ -5299,7 +5301,7 @@ Result::isError(  ): boolean
 
 ### isOk
 
-
+Returns true if the result is a success
 
 ```php
 Result::isOk(  ): boolean
@@ -5315,13 +5317,42 @@ Result::isOk(  ): boolean
 
 ### value
 
-
+Attempts to extract and return the success value. If the result was a
+success then the value is returned. If the result was a failure then
+calling this method will throw the exception that is stored.
 
 ```php
 Result::value(  ): mixed
 ```
 
+```php
+$resultA = Result::ok("foo");
+echo $result->value(); // foo
 
+$resultB = Result::err(new \Exception("Bar error");
+echo $result->value(); // PHP Fatal error:  Uncaught exception ...
+```
+
+To safely handle a result and extract its value the caller can use either
+conditionals or try / catch syntax
+
+```php
+$resultA = Result::ok("foo");
+
+if ($resultA->isOk()) {
+  echo $result->value(); // foo
+} else {
+  // ...
+}
+
+$resultB = Result::err(new \Exception("Bar error");
+
+try {
+  echo $result->value();
+} catch (\Exception $e) {
+  echo $e->getMessage(); // Bar error
+}
+```
 
 
 
@@ -5331,7 +5362,8 @@ Result::value(  ): mixed
 
 ### getErr
 
-
+Returns the inner error of a failure. This returns null if the result is
+a success.
 
 ```php
 Result::getErr(  ): \Exception|null
@@ -5347,13 +5379,21 @@ Result::getErr(  ): \Exception|null
 
 ### valueOr
 
-
+Returns the success value if the result was a success. If the result was a
+failure, then instead of throwing the inner error the fallback value is
+returned.
 
 ```php
 Result::valueOr( mixed $fallback ): mixed
 ```
 
+```php
+$resultA = Result::ok("alpha");
+echo $result->valueOr(""beta"); // alpha
 
+$resultB = Result::err(new \Exception("delta error");
+echo $result->valueOr("gamma"); // gamma
+```
 
 
 **Parameters:**
@@ -5596,7 +5636,7 @@ $auth = new PasswordAuth(
 );
 
 $client = new Client([
-  'base_uri' => 'https://my.endpoint.salesforce.com/services/data/v12.3/
+  'base_uri' => 'https://my.endpoint.salesforce.com/services/data/v12.3/'
 ]);
 
 $sfClient = SFAPIClient::connectWith($client, $auth);

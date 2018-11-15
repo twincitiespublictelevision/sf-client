@@ -27,6 +27,7 @@ class SFObjectResult {
   /**
    * @param SFObject|null $value
    * @return SFObjectResult
+   * @see Result::ok()
    */
   public static function ok(?SFObject $value): SFObjectResult {
       return new SFObjectResult(Result::ok($value));
@@ -35,6 +36,7 @@ class SFObjectResult {
   /**
    * @param \Exception $err
    * @return SFObjectResult
+   * @see Result::err()
    */
   public static function err(\Exception $err): SFObjectResult {
       return new SFObjectResult(Result::err($err));
@@ -42,6 +44,7 @@ class SFObjectResult {
 
   /**
    * @return bool
+   * @see Result::isOK()
    */
   public function isOk(): bool {
       return $this->res->isOk();
@@ -49,6 +52,7 @@ class SFObjectResult {
 
   /**
    * @return bool
+   * @see Result::isError()
    */
   public function isError(): bool {
       return $this->res->isError();
@@ -57,6 +61,7 @@ class SFObjectResult {
   /**
    * @return SFObject|null
    * @throws \Exception
+   * @see Result::value()
    */
   public function value(): ?SFObject {
       return $this->res->value();
@@ -64,6 +69,7 @@ class SFObjectResult {
 
   /**
    * @return \Exception
+   * @see Result::getErr()
    */
   public function getErr(): \Exception {
       return $this->res->getErr();
@@ -72,6 +78,7 @@ class SFObjectResult {
   /**
    * @param $fallback
    * @return mixed
+   * @see Result::valueOr()
    */
   public function valueOr($fallback) {
       return $this->res->valueOr($fallback);
