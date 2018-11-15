@@ -52,13 +52,17 @@ jobs:
           command: ./vendor/bin/phpunit
       - store_test_results:
           path: test-results
-      - run:
-          name: Create docs
-          command: ./vendor/bin/phpdoc
       - save_cache:
           key: codegen-{{ checksum ".circle-sha" }}
           paths:
             - ~/project/src
+      - run:
+          name: Create docs
+          command: ./vendor/bin/phpdoc
+      - save_cache:
+          key: docs-{{ checksum ".circle-sha" }}
+          paths:
+          - ~/project/src
 
   deploy_to_github:
     docker:
@@ -69,6 +73,8 @@ jobs:
         key: repo-{{ .Branch }}-{{ checksum ".circle-sha" }}
     - restore_cache:
         key: codegen-{{ checksum ".circle-sha" }}
+    - restore_cache:
+        key: docs-{{ checksum ".circle-sha" }}
     - add-ssh-keys:
         fingerprints:
         - "5e:6c:f7:69:68:88:a7:a1:1a:c5:81:a2:c4:7d:c1:be"
