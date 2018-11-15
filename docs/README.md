@@ -226,7 +226,6 @@
     * [getUserProvisioningRequest](#getuserprovisioningrequest)
     * [patchUserProvisioningRequest](#patchuserprovisioningrequest)
     * [deleteUserProvisioningRequest](#deleteuserprovisioningrequest)
-    * [__construct](#__construct-3)
 * [Result](#result)
     * [ok](#ok-1)
     * [err](#err-1)
@@ -236,7 +235,7 @@
     * [getErr](#geterr-1)
     * [valueOr](#valueor-1)
 * [ScopedSFAPIClient](#scopedsfapiclient)
-    * [__construct](#__construct-4)
+    * [__construct](#__construct-3)
     * [getScope](#getscope)
     * [create](#create)
     * [get](#get)
@@ -255,12 +254,12 @@
     * [authenticatedRequest](#authenticatedrequest)
     * [run](#run)
 * [SFCreation](#sfcreation)
-    * [__construct](#__construct-5)
+    * [__construct](#__construct-4)
     * [getId](#getid)
     * [wasSuccessful](#wassuccessful)
     * [getErrors](#geterrors)
 * [SFCreationResult](#sfcreationresult)
-    * [__construct](#__construct-6)
+    * [__construct](#__construct-5)
     * [ok](#ok-2)
     * [err](#err-2)
     * [isOk](#isok-2)
@@ -269,14 +268,14 @@
     * [getErr](#geterr-2)
     * [valueOr](#valueor-2)
 * [SFObject](#sfobject)
-    * [__construct](#__construct-7)
+    * [__construct](#__construct-6)
 * [SFRecords](#sfrecords)
-    * [__construct](#__construct-8)
+    * [__construct](#__construct-7)
     * [getTotal](#gettotal)
     * [hasMore](#hasmore)
     * [getRecords](#getrecords)
 * [SFRecordsResult](#sfrecordsresult)
-    * [__construct](#__construct-9)
+    * [__construct](#__construct-8)
     * [ok](#ok-3)
     * [err](#err-3)
     * [isOk](#isok-3)
@@ -5232,28 +5231,6 @@ NPSPClient::deleteUserProvisioningRequest( string $id ): \SFClient\Result\BoolRe
 
 ---
 
-### __construct
-
-NPSPClient constructor.
-
-```php
-NPSPClient::__construct( \SFClient\SalesForce\SFAPIClient $client )
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$client` | **\SFClient\SalesForce\SFAPIClient** |  |
-
-
-
-
----
-
 ## Result
 
 Class Result
@@ -6068,7 +6045,8 @@ SFObject::__construct( \stdClass $data )
 
 Class SFRecords
 
-
+A collection of SalesForce Objects. This collection may only contain a
+partial set of the total objects in SalesForce.
 
 * Full name: \SFClient\SalesForce\SFRecords
 
@@ -6081,7 +6059,10 @@ SFRecords constructor.
 SFRecords::__construct( \stdClass $data )
 ```
 
-
+Requires the $data argument to contain specific properties:
+* int totalSize
+* bool done
+* array records
 
 
 **Parameters:**
@@ -6097,7 +6078,8 @@ SFRecords::__construct( \stdClass $data )
 
 ### getTotal
 
-
+Returns the total number of objects in SalesForce that this partial
+collection was taken from.
 
 ```php
 SFRecords::getTotal(  ): integer
@@ -6113,7 +6095,7 @@ SFRecords::getTotal(  ): integer
 
 ### hasMore
 
-
+Returns true if there are more objects in SalesForce to fetch.
 
 ```php
 SFRecords::hasMore(  ): boolean
@@ -6129,7 +6111,8 @@ SFRecords::hasMore(  ): boolean
 
 ### getRecords
 
-
+Returns an array of SFObjects representing records returned by the
+SalesForce API.
 
 ```php
 SFRecords::getRecords(  ): array&lt;mixed,\SFClient\SalesForce\SFObject&gt;
