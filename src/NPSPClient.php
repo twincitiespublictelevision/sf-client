@@ -14,11 +14,9 @@ use SFClient\SalesForce\SFAPIClient;
  * extends the functionality of the base SalesForce client by adding CRUD
  * support for the custom objects that are supplied by the NPSP package.
  *
- * <code>
- * <?php
- *
+ * ```php
  * $client = new NPSPClient(SFAPIClient::connect($endpoint, $auth));
- * </code>
+ * ```
  *
  * @package SFClient
  *
