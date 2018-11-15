@@ -5371,28 +5371,41 @@ Result::valueOr( mixed $fallback ): mixed
 
 Class ScopedSFAPIClient
 
+A SalesForce API client that is scoped down to a specific SalesForce object
+type. The scoped clients wraps an existing SalesForce API client meaning that
+calls to the scoped client are passed on to the SalesForce API client that
+was used to construct the scoped client.
 
+This can be useful when needing to pass to an external system, a client that
+has reduced capabilities.
+
+```php
+$accounts = new ScopedSFAPIClient($sfClient, 'Account');
+
+perform_account_logic($accounts);
+
+```
 
 * Full name: \SFClient\SalesForce\ScopedSFAPIClient
 
 
 ### __construct
 
-ScopedSFClient constructor.
+Creates a SalesForce API client scoped to a particular object type.
 
 ```php
 ScopedSFAPIClient::__construct( \GuzzleHttp\Client $client, string $objectScope )
 ```
 
-
+ScopedSFClient constructor.
 
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$client` | **\GuzzleHttp\Client** |  |
-| `$objectScope` | **string** |  |
+| `$client` | **\GuzzleHttp\Client** | SalesForce API client to wrap |
+| `$objectScope` | **string** | Object type to query against |
 
 
 
@@ -5401,7 +5414,7 @@ ScopedSFAPIClient::__construct( \GuzzleHttp\Client $client, string $objectScope 
 
 ### getScope
 
-
+Returns the object type scope that is applied to this client
 
 ```php
 ScopedSFAPIClient::getScope(  ): string
@@ -5434,6 +5447,9 @@ ScopedSFAPIClient::create( array $data ): \SFClient\Result\SFCreationResult
 
 
 
+**See Also:**
+
+* \SFClient\SalesForce\SFAPIClient::create() 
 
 ---
 
@@ -5457,6 +5473,9 @@ ScopedSFAPIClient::get( string $id, array $fields = array() ): \SFClient\Result\
 
 
 
+**See Also:**
+
+* \SFClient\SalesForce\SFAPIClient::get() 
 
 ---
 
@@ -5480,6 +5499,9 @@ ScopedSFAPIClient::patch( string $id, array $data ): \SFClient\Result\BoolResult
 
 
 
+**See Also:**
+
+* \SFClient\SalesForce\SFAPIClient::patch() 
 
 ---
 
@@ -5502,6 +5524,9 @@ ScopedSFAPIClient::delete( string $id ): \SFClient\Result\BoolResult
 
 
 
+**See Also:**
+
+* \SFClient\SalesForce\SFAPIClient::delete() 
 
 ---
 
