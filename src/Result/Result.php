@@ -72,16 +72,17 @@ class Result {
   }
 
   /**
-   * Attempts to extract and return the success value. If the result was a
-   * success then the value is returned. If the result was a failure then
-   * calling this method will throw the exception that is stored.
+   * Attempts to extract and return the success value.
+   *
+   * If the result was a success then the value is returned. If the result was
+   * a failure then calling this method will throw the exception that is stored.
    *
    * ```php
    * $resultA = Result::ok("foo");
-   * echo $result->value(); // foo
+   * echo $resultA->value(); // foo
    *
    * $resultB = Result::err(new \Exception("Bar error");
-   * echo $result->value(); // PHP Fatal error:  Uncaught exception ...
+   * echo $resultB->value(); // PHP Fatal error:  Uncaught exception ...
    * ```
    *
    * To safely handle a result and extract its value the caller can use either
@@ -99,7 +100,7 @@ class Result {
    * $resultB = Result::err(new \Exception("Bar error");
    *
    * try {
-   *   echo $result->value();
+   *   echo $resultB->value();
    * } catch (\Exception $e) {
    *   echo $e->getMessage(); // Bar error
    * }
@@ -133,10 +134,10 @@ class Result {
    *
    * ```php
    * $resultA = Result::ok("alpha");
-   * echo $result->valueOr(""beta"); // alpha
+   * echo $resultA->valueOr("beta"); // alpha
    *
    * $resultB = Result::err(new \Exception("delta error");
-   * echo $result->valueOr("gamma"); // gamma
+   * echo $resultB->valueOr("gamma"); // gamma
    * ```
    *
    * @param mixed $fallback

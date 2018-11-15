@@ -27,6 +27,7 @@ class <T>Result {
   /**
    * @param <T> $value
    * @return <T>Result
+   * @see Result::ok()
    */
   public static function ok(<T> $value): <T>Result {
       return new <T>Result(Result::ok($value));
@@ -35,6 +36,7 @@ class <T>Result {
   /**
    * @param \Exception $err
    * @return <T>Result
+   * @see Result::err()
    */
   public static function err(\Exception $err): <T>Result {
       return new <T>Result(Result::err($err));
@@ -42,6 +44,7 @@ class <T>Result {
 
   /**
    * @return bool
+   * @see Result::isOk()
    */
   public function isOk(): bool {
       return $this->res->isOk();
@@ -49,6 +52,7 @@ class <T>Result {
 
   /**
    * @return bool
+   * @see Result::isError()
    */
   public function isError(): bool {
       return $this->res->isError();
@@ -57,6 +61,7 @@ class <T>Result {
   /**
    * @return <T>
    * @throws \Exception
+   * @see Result::value()
    */
   public function value(): <T> {
       return $this->res->value();
@@ -64,6 +69,7 @@ class <T>Result {
 
   /**
    * @return \Exception
+   * @see Result::getErr()
    */
   public function getErr(): \Exception {
       return $this->res->getErr();
@@ -72,6 +78,7 @@ class <T>Result {
   /**
    * @param $fallback
    * @return mixed
+   * @see Result::valueOr()
    */
   public function valueOr($fallback) {
       return $this->res->valueOr($fallback);
