@@ -5360,7 +5360,7 @@ Result::valueOr( mixed $fallback ): mixed
 
 ## ScopedSFAPIClient
 
-Class ScopedSFClient
+Class ScopedSFAPIClient
 
 
 
