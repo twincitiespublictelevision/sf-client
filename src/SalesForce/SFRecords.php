@@ -4,6 +4,10 @@ namespace SFClient\SalesForce;
 
 /**
  * Class SFRecords
+ *
+ * A collection of SalesForce Objects. This collection may only contain a
+ * partial set of the total objects in SalesForce.
+ *
  * @package SFClient\SalesForce
  */
 class SFRecords {
@@ -25,6 +29,12 @@ class SFRecords {
 
   /**
    * SFRecords constructor.
+   *
+   * Requires the $data argument to contain specific properties:
+   * * int totalSize
+   * * bool done
+   * * array records
+   *
    * @param \stdClass $data
    */
   public function __construct(\stdClass $data) {
@@ -46,6 +56,9 @@ class SFRecords {
   }
 
   /**
+   * Returns the total number of objects in SalesForce that this partial
+   * collection was taken from.
+   *
    * @return int
    */
   public function getTotal(): int {
@@ -53,6 +66,8 @@ class SFRecords {
   }
 
   /**
+   * Returns true if there are more objects in SalesForce to fetch.
+   *
    * @return bool
    */
   public function hasMore(): bool {
@@ -60,6 +75,9 @@ class SFRecords {
   }
 
   /**
+   * Returns an array of SFObjects representing records returned by the
+   * SalesForce API.
+   *
    * @return SFObject[]
    */
   public function getRecords(): array {

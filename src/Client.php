@@ -10,6 +10,16 @@ use SFClient\SalesForce\SFAPIClient;
 
 /**
  * Class Client
+ *
+ * Client for interacting with the SalesForce objects. This client is a small
+ * wrapper around an underlying SalesForce API Client. Its purpose is to allow
+ * for direct access to objects as opposed to general CRUD methods. By design
+ * only base SalesForce objects are supporting by this client.
+ *
+ * ```php
+ * $client = new Client(SFAPIClient::connect($endpoint, $auth));
+ * ```
+ *
  * @package SFClient
  *
  * @method SFCreationResult createAccount(array $data)
@@ -165,6 +175,7 @@ class Client {
   /**
    * Client constructor.
    * @param SFAPIClient $client
+   * @internal
    */
   public function __construct(SFAPIClient $client) {
     $this->_client = $client;
@@ -183,6 +194,7 @@ class Client {
   /**
    * @param string $name
    * @param array $arguments
+   * @internal
    */
   public function __call(string $name, array $arguments) {
     if ($parts = $this->getRESTParts($name)) {
@@ -195,6 +207,7 @@ class Client {
   /**
    * @param string $name
    * @return null|string
+   * @internal
    */
   public function getRESTParts(string $name): ?array {
     $methods = ['get', 'patch', 'create', 'delete'];

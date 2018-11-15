@@ -234,6 +234,7 @@ class NPSPClient extends Client {
   /**
    * NPSPClient constructor.
    * @param SFAPIClient $client
+   * @internal
    */
   public function __construct(SFAPIClient $client) {
     parent::__construct($client);
