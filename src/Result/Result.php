@@ -4,6 +4,10 @@ namespace SFClient\Result;
 
 /**
  * Class Result
+ *
+ * A successful or failure to perform some operation. Used as an alternative
+ * to raising exceptions when needing to propagate errors.
+ *
  * @package SFClient\Result
  */
 class Result {
@@ -29,7 +33,9 @@ class Result {
   }
 
   /**
-   * @param mixed $value
+   * Constructs a successful result of some type T.
+   *
+   * @param mixed $value The success value
    * @return Result
    */
   public static function ok($value): Result {
@@ -37,7 +43,10 @@ class Result {
   }
 
   /**
-   * @param \Exception $err
+   * Constructs a failure result of some error type E. To construct a failure
+   * an exception must be supplied.
+   *
+   * @param \Exception $err The failure error
    * @return Result
    */
   public static function err(\Exception $err): Result {
@@ -45,6 +54,8 @@ class Result {
   }
 
   /**
+   * Returns true if the result is a failure
+   *
    * @return bool
    */
   public function isError(): bool {
@@ -52,6 +63,8 @@ class Result {
   }
 
   /**
+   * Returns true if the result is a success
+   *
    * @return bool
    */
   public function isOk(): bool {
@@ -59,6 +72,39 @@ class Result {
   }
 
   /**
+   * Attempts to extract and return the success value. If the result was a
+   * success then the value is returned. If the result was a failure then
+   * calling this method will throw the exception that is stored.
+   *
+   * ```php
+   * $resultA = Result::ok("foo");
+   * echo $result->value(); // foo
+   *
+   * $resultB = Result::err(new \Exception("Bar error");
+   * echo $result->value(); // PHP Fatal error:  Uncaught exception ...
+   * ```
+   *
+   * To safely handle a result and extract its value the caller can use either
+   * conditionals or try / catch syntax
+   *
+   * ```php
+   * $resultA = Result::ok("foo");
+   *
+   * if ($resultA->isOk()) {
+   *   echo $result->value(); // foo
+   * } else {
+   *   // ...
+   * }
+   *
+   * $resultB = Result::err(new \Exception("Bar error");
+   *
+   * try {
+   *   echo $result->value();
+   * } catch (\Exception $e) {
+   *   echo $e->getMessage(); // Bar error
+   * }
+   * ```
+   *
    * @return mixed
    * @throws \Exception
    */
@@ -71,6 +117,9 @@ class Result {
   }
 
   /**
+   * Returns the inner error of a failure. This returns null if the result is
+   * a success.
+   *
    * @return \Exception|null
    */
   public function getErr() {
@@ -78,6 +127,18 @@ class Result {
   }
 
   /**
+   * Returns the success value if the result was a success. If the result was a
+   * failure, then instead of throwing the inner error the fallback value is
+   * returned.
+   *
+   * ```php
+   * $resultA = Result::ok("alpha");
+   * echo $result->valueOr(""beta"); // alpha
+   *
+   * $resultB = Result::err(new \Exception("delta error");
+   * echo $result->valueOr("gamma"); // gamma
+   * ```
+   *
    * @param mixed $fallback
    * @return mixed
    */

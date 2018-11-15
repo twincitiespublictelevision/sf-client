@@ -95,7 +95,7 @@ class SFAPIClient {
    * );
    *
    * $client = new Client([
-   *   'base_uri' => 'https://my.endpoint.salesforce.com/services/data/v12.3/
+   *   'base_uri' => 'https://my.endpoint.salesforce.com/services/data/v12.3/'
    * ]);
    *
    * $sfClient = SFAPIClient::connectWith($client, $auth);
