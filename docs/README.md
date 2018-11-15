@@ -13,8 +13,6 @@
     * [valueOr](#valueor)
 * [Element](#element)
     * [__construct](#__construct-1)
-    * [__isset](#__isset)
-    * [__get](#__get)
 * [Endpoint](#endpoint)
     * [__construct](#__construct-2)
     * [getUrl](#geturl)
@@ -272,8 +270,6 @@
     * [valueOr](#valueor-2)
 * [SFObject](#sfobject)
     * [__construct](#__construct-7)
-    * [__isset](#__isset-1)
-    * [__get](#__get-1)
 * [SFRecords](#sfrecords)
     * [__construct](#__construct-8)
     * [getTotal](#gettotal)
@@ -454,7 +450,8 @@ BoolResult::valueOr(  $fallback ): mixed
 
 Class Element
 
-
+Wrapper class for stdClass that helps make accessing arbitrary
+properties safer
 
 * Full name: \SFClient\Element
 
@@ -475,50 +472,6 @@ Element::__construct( \stdClass $data )
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$data` | **\stdClass** |  |
-
-
-
-
----
-
-### __isset
-
-
-
-```php
-Element::__isset( string $name ): boolean
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$name` | **string** |  |
-
-
-
-
----
-
-### __get
-
-
-
-```php
-Element::__get( string $name ): mixed
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$name` | **string** |  |
 
 
 
@@ -6076,7 +6029,8 @@ SFCreationResult::valueOr(  $fallback ): mixed
 
 Class SFObject
 
-
+Wrapper class for stdClass that helps make accessing arbitrary
+properties safer
 
 * Full name: \SFClient\SalesForce\SFObject
 * Parent class: \SFClient\Element
@@ -6098,50 +6052,6 @@ SFObject::__construct( \stdClass $data )
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$data` | **\stdClass** |  |
-
-
-
-
----
-
-### __isset
-
-
-
-```php
-SFObject::__isset( string $name ): boolean
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$name` | **string** |  |
-
-
-
-
----
-
-### __get
-
-
-
-```php
-SFObject::__get( string $name ): mixed
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$name` | **string** |  |
 
 
 
