@@ -52,6 +52,9 @@ jobs:
           command: ./vendor/bin/phpunit
       - store_test_results:
           path: test-results
+      - run:
+          name: Create docs
+          command: ./vendor/bin/phpdoc
       - save_cache:
           key: codegen-{{ checksum ".circle-sha" }}
           paths:
