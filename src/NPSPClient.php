@@ -16,9 +16,7 @@ use SFClient\SalesForce\SFAPIClient;
  *
  * <code>
  * <?php
- *
  * $client = new NPSPClient(SFAPIClient::connect($endpoint, $auth));
- *
  * ?>
  * </code>
  *

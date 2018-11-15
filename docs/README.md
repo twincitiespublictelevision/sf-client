@@ -546,9 +546,7 @@ support for the custom objects that are supplied by the NPSP package.
 
 <code>
 <?php
-
 $client = new NPSPClient(SFAPIClient::connect($endpoint, $auth));
-
 ?>
 </code>
 
