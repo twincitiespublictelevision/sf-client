@@ -544,11 +544,9 @@ Client for interacting with the Nonprofit Success Pack package. This client
 extends the functionality of the base SalesForce client by adding CRUD
 support for the custom objects that are supplied by the NPSP package.
 
-<code>
-<?php
-
+```php
 $client = new NPSPClient(SFAPIClient::connect($endpoint, $auth));
-</code>
+```
 
 * Full name: \SFClient\NPSPClient
 * Parent class: 
