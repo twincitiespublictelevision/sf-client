@@ -2,6 +2,8 @@
 
 namespace SFClientCodeGen;
 
+use const SFClient\DS;
+
 list(
   $classTemplate,
   $nullableClassTemplate,

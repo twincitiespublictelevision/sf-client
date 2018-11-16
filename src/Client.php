@@ -175,11 +175,10 @@ class Client {
   /**
    * Client constructor.
    * @param SFAPIClient $client
-   * @internal
    */
   public function __construct(SFAPIClient $client) {
     $this->_client = $client;
-    $this->_types = require __DIR__ . '/SalesForce/ObjectTypes.php';
+    $this->_types = require __DIR__ . DS .'SalesForce' . DS . 'ObjectTypes.php';
     $this->_typeNames = array_keys($this->_types);
   }
 

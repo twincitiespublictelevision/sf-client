@@ -234,12 +234,11 @@ class NPSPClient extends Client {
   /**
    * NPSPClient constructor.
    * @param SFAPIClient $client
-   * @internal
    */
   public function __construct(SFAPIClient $client) {
     parent::__construct($client);
-    $types = require __DIR__ . '/SalesForce/ObjectTypes.php';
-    $npspTypes = require __DIR__ . '/SalesForce/NPSPObjectTypes.php';
+    $types = require __DIR__ . DS . 'SalesForce' . DS . 'ObjectTypes.php';
+    $npspTypes = require __DIR__ . DS . 'SalesForce' . DS . 'NPSPObjectTypes.php';
 
     $this->_types = array_merge($types, $npspTypes);
     $this->_typeNames = array_keys($this->_types);

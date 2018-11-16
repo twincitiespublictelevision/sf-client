@@ -2,7 +2,7 @@
 
 namespace SFClientCodeGen;
 
-const DS = DIRECTORY_SEPARATOR;
+use const SFClient\DS;
 
 $gen = function($type) {
   return " * @method SFCreationResult create{$type}(array \$data)

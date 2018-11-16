@@ -73,3 +73,6 @@ function ex_json_encode($value, $options = 0, $depth = 512)
 
   return $json;
 }
+
+// Define a helper constant shorthand for directory separators
+const DS = DIRECTORY_SEPARATOR;
