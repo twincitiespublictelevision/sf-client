@@ -3774,7 +3774,7 @@ Element::__construct( \stdClass $data )
 
 Class Endpoint
 
-
+A representation of a versioned SalesForce REST API endpoint.
 
 * Full name: \SFClient\Endpoint\Endpoint
 
@@ -3787,7 +3787,13 @@ Endpoint constructor.
 Endpoint::__construct( string $baseUrl, string $version )
 ```
 
+The provided SalesForce base url should omit a trailing slash. The version
+should be of the form \d\d.\d and should omit the preceding 'v'.
 
+```php
+$endpoint = new Endpoint('https://company.my.salesforce.com', '10.0');
+
+```
 
 
 **Parameters:**
@@ -3804,7 +3810,7 @@ Endpoint::__construct( string $baseUrl, string $version )
 
 ### getUrl
 
-
+Gets the full endpoint url
 
 ```php
 Endpoint::getUrl(  ): string
@@ -12666,4 +12672,4 @@ SFRecordsResult::valueOr(  $fallback ): mixed
 
 
 --------
-> This document was automatically generated from source code comments on 2018-11-15 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
+> This document was automatically generated from source code comments on 2018-11-16 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
