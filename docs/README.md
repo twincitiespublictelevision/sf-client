@@ -144,11 +144,12 @@
     * [getUserProvisioningRequest](#getuserprovisioningrequest)
     * [patchUserProvisioningRequest](#patchuserprovisioningrequest)
     * [deleteUserProvisioningRequest](#deleteuserprovisioningrequest)
+    * [__construct](#__construct-1)
     * [search](#search)
 * [Element](#element)
-    * [__construct](#__construct-1)
-* [Endpoint](#endpoint)
     * [__construct](#__construct-2)
+* [Endpoint](#endpoint)
+    * [__construct](#__construct-3)
     * [getUrl](#geturl)
 * [FailedToAuthenticate](#failedtoauthenticate)
 * [NPSPClient](#npspclient)
@@ -492,6 +493,7 @@
     * [getUserProvisioningRequest](#getuserprovisioningrequest-2)
     * [patchUserProvisioningRequest](#patchuserprovisioningrequest-2)
     * [deleteUserProvisioningRequest](#deleteuserprovisioningrequest-2)
+    * [__construct](#__construct-4)
     * [search](#search-1)
 * [Result](#result)
     * [ok](#ok-1)
@@ -502,7 +504,7 @@
     * [getErr](#geterr-1)
     * [valueOr](#valueor-1)
 * [ScopedSFAPIClient](#scopedsfapiclient)
-    * [__construct](#__construct-3)
+    * [__construct](#__construct-5)
     * [getScope](#getscope)
     * [create](#create)
     * [get](#get)
@@ -518,12 +520,12 @@
     * [delete](#delete-1)
     * [query](#query)
 * [SFCreation](#sfcreation)
-    * [__construct](#__construct-4)
+    * [__construct](#__construct-6)
     * [getId](#getid)
     * [wasSuccessful](#wassuccessful)
     * [getErrors](#geterrors)
 * [SFCreationResult](#sfcreationresult)
-    * [__construct](#__construct-5)
+    * [__construct](#__construct-7)
     * [ok](#ok-2)
     * [err](#err-2)
     * [isOk](#isok-2)
@@ -532,14 +534,14 @@
     * [getErr](#geterr-2)
     * [valueOr](#valueor-2)
 * [SFObject](#sfobject)
-    * [__construct](#__construct-6)
+    * [__construct](#__construct-8)
 * [SFRecords](#sfrecords)
-    * [__construct](#__construct-7)
+    * [__construct](#__construct-9)
     * [getTotal](#gettotal)
     * [hasMore](#hasmore)
     * [getRecords](#getrecords)
 * [SFRecordsResult](#sfrecordsresult)
-    * [__construct](#__construct-8)
+    * [__construct](#__construct-10)
     * [ok](#ok-3)
     * [err](#err-3)
     * [isOk](#isok-3)
@@ -3710,6 +3712,28 @@ Client::deleteUserProvisioningRequest( string $id ): \SFClient\Result\BoolResult
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$id` | **string** |  |
+
+
+
+
+---
+
+### __construct
+
+Client constructor.
+
+```php
+Client::__construct( \SFClient\SalesForce\SFAPIClient $client )
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$client` | **\SFClient\SalesForce\SFAPIClient** |  |
 
 
 
@@ -11494,6 +11518,28 @@ NPSPClient::deleteUserProvisioningRequest( string $id ): \SFClient\Result\BoolRe
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$id` | **string** |  |
+
+
+
+
+---
+
+### __construct
+
+NPSPClient constructor.
+
+```php
+NPSPClient::__construct( \SFClient\SalesForce\SFAPIClient $client )
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$client` | **\SFClient\SalesForce\SFAPIClient** |  |
 
 
 
