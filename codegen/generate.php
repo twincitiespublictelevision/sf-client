@@ -2,8 +2,6 @@
 
 namespace SFClientCodeGen;
 
-use const SFClient\DS;
-
 list(
   $classTemplate,
   $nullableClassTemplate,
@@ -45,13 +43,13 @@ foreach ($config as $i => $elem) {
 }
 
 
-$client = implode(DS, [__DIR__, '..', 'src', 'Client.php']);
-$types = require_once implode(DS, [__DIR__, '..', 'src', 'SalesForce', 'ObjectTypes.php']);
+$client = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'src', 'Client.php']);
+$types = require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'src', 'SalesForce', 'ObjectTypes.php']);
 
 $writeDocs($client, $types);
 
-$npspClient = implode(DS, [__DIR__, '..', 'src', 'NPSPClient.php']);
-$npspTypes = require_once implode(DS, [__DIR__, '..', 'src', 'SalesForce', 'NPSPObjectTypes.php']);
+$npspClient = implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'src', 'NPSPClient.php']);
+$npspTypes = require_once implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'src', 'SalesForce', 'NPSPObjectTypes.php']);
 $totalTypes = array_merge($types, $npspTypes);
 ksort($totalTypes);
 

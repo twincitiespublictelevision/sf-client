@@ -14,13 +14,13 @@ $gen = function($type) {
 
 
 $write = function($classPath, $types) use ($gen) {
-  $template = file_get_contents(__DIR__ . DS . 'ClientDocs.tmpl');
+  $template = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'ClientDocs.tmpl');
   $typeDocs = implode('', array_map($gen, array_keys($types)));
 
   $clientDocs = preg_replace('/<D>/', rtrim($typeDocs), $template);
   $clientClass = file_get_contents($classPath);
 
-  $class = substr($classPath, strrpos($classPath, DS) + 1, -4);
+  $class = substr($classPath, strrpos($classPath, DIRECTORY_SEPARATOR) + 1, -4);
 
   return file_put_contents(
     $classPath,
