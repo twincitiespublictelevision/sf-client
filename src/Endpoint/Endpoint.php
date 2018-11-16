@@ -4,6 +4,9 @@ namespace SFClient\Endpoint;
 
 /**
  * Class Endpoint
+ *
+ * A representation of a versioned SalesForce REST API endpoint.
+ *
  * @package SFClient\Endpoint
  */
 class Endpoint {
@@ -20,6 +23,15 @@ class Endpoint {
 
   /**
    * Endpoint constructor.
+   *
+   * The provided SalesForce base url should omit a trailing slash. The version
+   * should be of the form \d\d.\d and should omit the preceding 'v'.
+   *
+   * ```php
+   * $endpoint = new Endpoint('https://company.my.salesforce.com', '10.0');
+   *
+   * ```
+   *
    * @param string $baseUrl
    * @param string $version
    */
@@ -29,6 +41,8 @@ class Endpoint {
   }
 
   /**
+   * Gets the full endpoint url
+   *
    * @return string
    */
   public function getUrl(): string {
