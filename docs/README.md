@@ -169,6 +169,10 @@
     * [getAffiliation](#getaffiliation)
     * [patchAffiliation](#patchaffiliation)
     * [deleteAffiliation](#deleteaffiliation)
+    * [createAllocation](#createallocation)
+    * [getAllocation](#getallocation)
+    * [patchAllocation](#patchallocation)
+    * [deleteAllocation](#deleteallocation)
     * [createAsset](#createasset-1)
     * [getAsset](#getasset-1)
     * [patchAsset](#patchasset-1)
@@ -209,10 +213,14 @@
     * [getContractContactRole](#getcontractcontactrole-1)
     * [patchContractContactRole](#patchcontractcontactrole-1)
     * [deleteContractContactRole](#deletecontractcontactrole-1)
-    * [createDeliverable](#createdeliverable)
-    * [getDeliverable](#getdeliverable)
-    * [patchDeliverable](#patchdeliverable)
-    * [deleteDeliverable](#deletedeliverable)
+    * [createDataImport](#createdataimport)
+    * [getDataImport](#getdataimport)
+    * [patchDataImport](#patchdataimport)
+    * [deleteDataImport](#deletedataimport)
+    * [createDataImportBatch](#createdataimportbatch)
+    * [getDataImportBatch](#getdataimportbatch)
+    * [patchDataImportBatch](#patchdataimportbatch)
+    * [deleteDataImportBatch](#deletedataimportbatch)
     * [createDuplicateRecordItem](#createduplicaterecorditem-1)
     * [getDuplicateRecordItem](#getduplicaterecorditem-1)
     * [patchDuplicateRecordItem](#patchduplicaterecorditem-1)
@@ -245,14 +253,14 @@
     * [getEvent](#getevent-1)
     * [patchEvent](#patchevent-1)
     * [deleteEvent](#deleteevent-1)
-    * [createGAUAllocation](#creategauallocation)
-    * [getGAUAllocation](#getgauallocation)
-    * [patchGAUAllocation](#patchgauallocation)
-    * [deleteGAUAllocation](#deletegauallocation)
     * [createGeneralAccountingUnit](#creategeneralaccountingunit)
     * [getGeneralAccountingUnit](#getgeneralaccountingunit)
     * [patchGeneralAccountingUnit](#patchgeneralaccountingunit)
     * [deleteGeneralAccountingUnit](#deletegeneralaccountingunit)
+    * [createGrantDeadline](#creategrantdeadline)
+    * [getGrantDeadline](#getgrantdeadline)
+    * [patchGrantDeadline](#patchgrantdeadline)
+    * [deleteGrantDeadline](#deletegrantdeadline)
     * [createHousehold](#createhousehold)
     * [getHousehold](#gethousehold)
     * [patchHousehold](#patchhousehold)
@@ -269,14 +277,10 @@
     * [getMacro](#getmacro-1)
     * [patchMacro](#patchmacro-1)
     * [deleteMacro](#deletemacro-1)
-    * [createNPSPDataImport](#createnpspdataimport)
-    * [getNPSPDataImport](#getnpspdataimport)
-    * [patchNPSPDataImport](#patchnpspdataimport)
-    * [deleteNPSPDataImport](#deletenpspdataimport)
-    * [createNPSPDataImportBatch](#createnpspdataimportbatch)
-    * [getNPSPDataImportBatch](#getnpspdataimportbatch)
-    * [patchNPSPDataImportBatch](#patchnpspdataimportbatch)
-    * [deleteNPSPDataImportBatch](#deletenpspdataimportbatch)
+    * [createOppPayment](#createopppayment)
+    * [getOppPayment](#getopppayment)
+    * [patchOppPayment](#patchopppayment)
+    * [deleteOppPayment](#deleteopppayment)
     * [createOpportunity](#createopportunity-1)
     * [getOpportunity](#getopportunity-1)
     * [patchOpportunity](#patchopportunity-1)
@@ -297,10 +301,6 @@
     * [getPartialSoftCredit](#getpartialsoftcredit)
     * [patchPartialSoftCredit](#patchpartialsoftcredit)
     * [deletePartialSoftCredit](#deletepartialsoftcredit)
-    * [createPayment](#createpayment)
-    * [getPayment](#getpayment)
-    * [patchPayment](#patchpayment)
-    * [deletePayment](#deletepayment)
     * [createPricebook2](#createpricebook2-1)
     * [getPricebook2](#getpricebook2-1)
     * [patchPricebook2](#patchpricebook2-1)
@@ -313,10 +313,10 @@
     * [getQuickText](#getquicktext-1)
     * [patchQuickText](#patchquicktext-1)
     * [deleteQuickText](#deletequicktext-1)
-    * [createRecurringDonations](#createrecurringdonations)
-    * [getRecurringDonations](#getrecurringdonations)
-    * [patchRecurringDonations](#patchrecurringdonations)
-    * [deleteRecurringDonations](#deleterecurringdonations)
+    * [createRecurringDonation](#createrecurringdonation)
+    * [getRecurringDonation](#getrecurringdonation)
+    * [patchRecurringDonation](#patchrecurringdonation)
+    * [deleteRecurringDonation](#deleterecurringdonation)
     * [createRelationship](#createrelationship)
     * [getRelationship](#getrelationship)
     * [patchRelationship](#patchrelationship)
@@ -4234,6 +4234,96 @@ NPSPClient::deleteAffiliation( string $id ): \SFClient\Result\BoolResult
 
 ---
 
+### createAllocation
+
+
+
+```php
+NPSPClient::createAllocation( array $data ): \SFClient\Result\SFCreationResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$data` | **array** |  |
+
+
+
+
+---
+
+### getAllocation
+
+
+
+```php
+NPSPClient::getAllocation( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **string** |  |
+| `$fields` | **array** |  |
+
+
+
+
+---
+
+### patchAllocation
+
+
+
+```php
+NPSPClient::patchAllocation( string $id, array $data ): \SFClient\Result\BoolResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **string** |  |
+| `$data` | **array** |  |
+
+
+
+
+---
+
+### deleteAllocation
+
+
+
+```php
+NPSPClient::deleteAllocation( string $id ): \SFClient\Result\BoolResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **string** |  |
+
+
+
+
+---
+
 ### createAsset
 
 
@@ -5134,12 +5224,12 @@ NPSPClient::deleteContractContactRole( string $id ): \SFClient\Result\BoolResult
 
 ---
 
-### createDeliverable
+### createDataImport
 
 
 
 ```php
-NPSPClient::createDeliverable( array $data ): \SFClient\Result\SFCreationResult
+NPSPClient::createDataImport( array $data ): \SFClient\Result\SFCreationResult
 ```
 
 
@@ -5156,12 +5246,12 @@ NPSPClient::createDeliverable( array $data ): \SFClient\Result\SFCreationResult
 
 ---
 
-### getDeliverable
+### getDataImport
 
 
 
 ```php
-NPSPClient::getDeliverable( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
+NPSPClient::getDataImport( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
 ```
 
 
@@ -5179,12 +5269,12 @@ NPSPClient::getDeliverable( string $id, array $fields = [] ): \SFClient\Result\S
 
 ---
 
-### patchDeliverable
+### patchDataImport
 
 
 
 ```php
-NPSPClient::patchDeliverable( string $id, array $data ): \SFClient\Result\BoolResult
+NPSPClient::patchDataImport( string $id, array $data ): \SFClient\Result\BoolResult
 ```
 
 
@@ -5202,12 +5292,102 @@ NPSPClient::patchDeliverable( string $id, array $data ): \SFClient\Result\BoolRe
 
 ---
 
-### deleteDeliverable
+### deleteDataImport
 
 
 
 ```php
-NPSPClient::deleteDeliverable( string $id ): \SFClient\Result\BoolResult
+NPSPClient::deleteDataImport( string $id ): \SFClient\Result\BoolResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **string** |  |
+
+
+
+
+---
+
+### createDataImportBatch
+
+
+
+```php
+NPSPClient::createDataImportBatch( array $data ): \SFClient\Result\SFCreationResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$data` | **array** |  |
+
+
+
+
+---
+
+### getDataImportBatch
+
+
+
+```php
+NPSPClient::getDataImportBatch( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **string** |  |
+| `$fields` | **array** |  |
+
+
+
+
+---
+
+### patchDataImportBatch
+
+
+
+```php
+NPSPClient::patchDataImportBatch( string $id, array $data ): \SFClient\Result\BoolResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **string** |  |
+| `$data` | **array** |  |
+
+
+
+
+---
+
+### deleteDataImportBatch
+
+
+
+```php
+NPSPClient::deleteDataImportBatch( string $id ): \SFClient\Result\BoolResult
 ```
 
 
@@ -5944,96 +6124,6 @@ NPSPClient::deleteEvent( string $id ): \SFClient\Result\BoolResult
 
 ---
 
-### createGAUAllocation
-
-
-
-```php
-NPSPClient::createGAUAllocation( array $data ): \SFClient\Result\SFCreationResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$data` | **array** |  |
-
-
-
-
----
-
-### getGAUAllocation
-
-
-
-```php
-NPSPClient::getGAUAllocation( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$id` | **string** |  |
-| `$fields` | **array** |  |
-
-
-
-
----
-
-### patchGAUAllocation
-
-
-
-```php
-NPSPClient::patchGAUAllocation( string $id, array $data ): \SFClient\Result\BoolResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$id` | **string** |  |
-| `$data` | **array** |  |
-
-
-
-
----
-
-### deleteGAUAllocation
-
-
-
-```php
-NPSPClient::deleteGAUAllocation( string $id ): \SFClient\Result\BoolResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$id` | **string** |  |
-
-
-
-
----
-
 ### createGeneralAccountingUnit
 
 
@@ -6108,6 +6198,96 @@ NPSPClient::patchGeneralAccountingUnit( string $id, array $data ): \SFClient\Res
 
 ```php
 NPSPClient::deleteGeneralAccountingUnit( string $id ): \SFClient\Result\BoolResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **string** |  |
+
+
+
+
+---
+
+### createGrantDeadline
+
+
+
+```php
+NPSPClient::createGrantDeadline( array $data ): \SFClient\Result\SFCreationResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$data` | **array** |  |
+
+
+
+
+---
+
+### getGrantDeadline
+
+
+
+```php
+NPSPClient::getGrantDeadline( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **string** |  |
+| `$fields` | **array** |  |
+
+
+
+
+---
+
+### patchGrantDeadline
+
+
+
+```php
+NPSPClient::patchGrantDeadline( string $id, array $data ): \SFClient\Result\BoolResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **string** |  |
+| `$data` | **array** |  |
+
+
+
+
+---
+
+### deleteGrantDeadline
+
+
+
+```php
+NPSPClient::deleteGrantDeadline( string $id ): \SFClient\Result\BoolResult
 ```
 
 
@@ -6484,12 +6664,12 @@ NPSPClient::deleteMacro( string $id ): \SFClient\Result\BoolResult
 
 ---
 
-### createNPSPDataImport
+### createOppPayment
 
 
 
 ```php
-NPSPClient::createNPSPDataImport( array $data ): \SFClient\Result\SFCreationResult
+NPSPClient::createOppPayment( array $data ): \SFClient\Result\SFCreationResult
 ```
 
 
@@ -6506,12 +6686,12 @@ NPSPClient::createNPSPDataImport( array $data ): \SFClient\Result\SFCreationResu
 
 ---
 
-### getNPSPDataImport
+### getOppPayment
 
 
 
 ```php
-NPSPClient::getNPSPDataImport( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
+NPSPClient::getOppPayment( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
 ```
 
 
@@ -6529,12 +6709,12 @@ NPSPClient::getNPSPDataImport( string $id, array $fields = [] ): \SFClient\Resul
 
 ---
 
-### patchNPSPDataImport
+### patchOppPayment
 
 
 
 ```php
-NPSPClient::patchNPSPDataImport( string $id, array $data ): \SFClient\Result\BoolResult
+NPSPClient::patchOppPayment( string $id, array $data ): \SFClient\Result\BoolResult
 ```
 
 
@@ -6552,102 +6732,12 @@ NPSPClient::patchNPSPDataImport( string $id, array $data ): \SFClient\Result\Boo
 
 ---
 
-### deleteNPSPDataImport
+### deleteOppPayment
 
 
 
 ```php
-NPSPClient::deleteNPSPDataImport( string $id ): \SFClient\Result\BoolResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$id` | **string** |  |
-
-
-
-
----
-
-### createNPSPDataImportBatch
-
-
-
-```php
-NPSPClient::createNPSPDataImportBatch( array $data ): \SFClient\Result\SFCreationResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$data` | **array** |  |
-
-
-
-
----
-
-### getNPSPDataImportBatch
-
-
-
-```php
-NPSPClient::getNPSPDataImportBatch( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$id` | **string** |  |
-| `$fields` | **array** |  |
-
-
-
-
----
-
-### patchNPSPDataImportBatch
-
-
-
-```php
-NPSPClient::patchNPSPDataImportBatch( string $id, array $data ): \SFClient\Result\BoolResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$id` | **string** |  |
-| `$data` | **array** |  |
-
-
-
-
----
-
-### deleteNPSPDataImportBatch
-
-
-
-```php
-NPSPClient::deleteNPSPDataImportBatch( string $id ): \SFClient\Result\BoolResult
+NPSPClient::deleteOppPayment( string $id ): \SFClient\Result\BoolResult
 ```
 
 
@@ -7114,96 +7204,6 @@ NPSPClient::deletePartialSoftCredit( string $id ): \SFClient\Result\BoolResult
 
 ---
 
-### createPayment
-
-
-
-```php
-NPSPClient::createPayment( array $data ): \SFClient\Result\SFCreationResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$data` | **array** |  |
-
-
-
-
----
-
-### getPayment
-
-
-
-```php
-NPSPClient::getPayment( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$id` | **string** |  |
-| `$fields` | **array** |  |
-
-
-
-
----
-
-### patchPayment
-
-
-
-```php
-NPSPClient::patchPayment( string $id, array $data ): \SFClient\Result\BoolResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$id` | **string** |  |
-| `$data` | **array** |  |
-
-
-
-
----
-
-### deletePayment
-
-
-
-```php
-NPSPClient::deletePayment( string $id ): \SFClient\Result\BoolResult
-```
-
-
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$id` | **string** |  |
-
-
-
-
----
-
 ### createPricebook2
 
 
@@ -7474,12 +7474,12 @@ NPSPClient::deleteQuickText( string $id ): \SFClient\Result\BoolResult
 
 ---
 
-### createRecurringDonations
+### createRecurringDonation
 
 
 
 ```php
-NPSPClient::createRecurringDonations( array $data ): \SFClient\Result\SFCreationResult
+NPSPClient::createRecurringDonation( array $data ): \SFClient\Result\SFCreationResult
 ```
 
 
@@ -7496,12 +7496,12 @@ NPSPClient::createRecurringDonations( array $data ): \SFClient\Result\SFCreation
 
 ---
 
-### getRecurringDonations
+### getRecurringDonation
 
 
 
 ```php
-NPSPClient::getRecurringDonations( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
+NPSPClient::getRecurringDonation( string $id, array $fields = [] ): \SFClient\Result\SFObjectResult
 ```
 
 
@@ -7519,12 +7519,12 @@ NPSPClient::getRecurringDonations( string $id, array $fields = [] ): \SFClient\R
 
 ---
 
-### patchRecurringDonations
+### patchRecurringDonation
 
 
 
 ```php
-NPSPClient::patchRecurringDonations( string $id, array $data ): \SFClient\Result\BoolResult
+NPSPClient::patchRecurringDonation( string $id, array $data ): \SFClient\Result\BoolResult
 ```
 
 
@@ -7542,12 +7542,12 @@ NPSPClient::patchRecurringDonations( string $id, array $data ): \SFClient\Result
 
 ---
 
-### deleteRecurringDonations
+### deleteRecurringDonation
 
 
 
 ```php
-NPSPClient::deleteRecurringDonations( string $id ): \SFClient\Result\BoolResult
+NPSPClient::deleteRecurringDonation( string $id ): \SFClient\Result\BoolResult
 ```
 
 
@@ -12718,4 +12718,4 @@ SFRecordsResult::valueOr(  $fallback ): mixed
 
 
 --------
-> This document was automatically generated from source code comments on 2018-11-16 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
+> This document was automatically generated from source code comments on 2018-11-17 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
