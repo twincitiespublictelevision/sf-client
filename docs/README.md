@@ -146,6 +146,7 @@
     * [deleteUserProvisioningRequest](#deleteuserprovisioningrequest)
     * [__construct](#__construct-1)
     * [search](#search)
+    * [fullSearch](#fullsearch)
 * [Element](#element)
     * [__construct](#__construct-2)
 * [Endpoint](#endpoint)
@@ -495,6 +496,7 @@
     * [deleteUserProvisioningRequest](#deleteuserprovisioningrequest-2)
     * [__construct](#__construct-4)
     * [search](#search-1)
+    * [fullSearch](#fullsearch-1)
 * [Result](#result)
     * [ok](#ok-1)
     * [err](#err-1)
@@ -519,6 +521,7 @@
     * [patch](#patch-1)
     * [delete](#delete-1)
     * [query](#query)
+    * [fullQuery](#fullquery)
 * [SFCreation](#sfcreation)
     * [__construct](#__construct-6)
     * [getId](#getid)
@@ -535,13 +538,8 @@
     * [valueOr](#valueor-2)
 * [SFObject](#sfobject)
     * [__construct](#__construct-8)
-* [SFRecords](#sfrecords)
-    * [__construct](#__construct-9)
-    * [getTotal](#gettotal)
-    * [hasMore](#hasmore)
-    * [getRecords](#getrecords)
 * [SFRecordsResult](#sfrecordsresult)
-    * [__construct](#__construct-10)
+    * [__construct](#__construct-9)
     * [ok](#ok-3)
     * [err](#err-3)
     * [isOk](#isok-3)
@@ -3746,6 +3744,28 @@ Client::__construct( \SFClient\SalesForce\SFAPIClient $client )
 
 ```php
 Client::search( string $query ): \SFClient\Result\SFRecordsResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$query` | **string** |  |
+
+
+
+
+---
+
+### fullSearch
+
+
+
+```php
+Client::fullSearch( string $query ): \SFClient\Result\SFRecordsResult
 ```
 
 
@@ -11568,6 +11588,28 @@ NPSPClient::search( string $query ): \SFClient\Result\SFRecordsResult
 
 ---
 
+### fullSearch
+
+
+
+```php
+NPSPClient::fullSearch( string $query ): \SFClient\Result\SFRecordsResult
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$query` | **string** |  |
+
+
+
+
+---
+
 ## Result
 
 Class Result
@@ -12148,6 +12190,37 @@ to passing the query to the client.
 
 ---
 
+### fullQuery
+
+Performs an multiple queries against the SalesForce query endpoint to
+capture all results for a given query.
+
+```php
+SFAPIClient::fullQuery( string $query ): \SFClient\Result\SFRecordsResult
+```
+
+This method utilizies the built in SalesForce query response pagination and
+should reflect the behavior of following the next page urls.
+
+If any of the requests fail, the entire query attempt will fail and will
+return the erro of the failure.
+
+This method runs the provided query as-is and does not perform validation
+or sanitizion. Consumers of the client should handle these operations prior
+to passing the query to the client.
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$query` | **string** | A SOQL query to run |
+
+
+
+
+---
+
 ## SFCreation
 
 Class SFCreation
@@ -12448,91 +12521,6 @@ SFObject::__construct( \stdClass $data )
 
 ---
 
-## SFRecords
-
-Class SFRecords
-
-A collection of SalesForce Objects. This collection may only contain a
-partial set of the total objects in SalesForce.
-
-* Full name: \SFClient\SalesForce\SFRecords
-
-
-### __construct
-
-SFRecords constructor.
-
-```php
-SFRecords::__construct( \stdClass $data )
-```
-
-Requires the $data argument to contain specific properties:
-* int totalSize
-* bool done
-* array records
-
-
-**Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `$data` | **\stdClass** | A successful response object from SalesForce |
-
-
-
-
----
-
-### getTotal
-
-Returns the total number of objects in SalesForce that this partial
-collection was taken from.
-
-```php
-SFRecords::getTotal(  ): integer
-```
-
-
-
-
-
-
-
----
-
-### hasMore
-
-Returns true if there are more objects in SalesForce to fetch.
-
-```php
-SFRecords::hasMore(  ): boolean
-```
-
-
-
-
-
-
-
----
-
-### getRecords
-
-Returns an array of SFObjects representing records returned by the
-SalesForce API.
-
-```php
-SFRecords::getRecords(  ): array&lt;mixed,\SFClient\SalesForce\SFObject&gt;
-```
-
-
-
-
-
-
-
----
-
 ## SFRecordsResult
 
 Class SFRecordsResult
@@ -12718,4 +12706,4 @@ SFRecordsResult::valueOr(  $fallback ): mixed
 
 
 --------
-> This document was automatically generated from source code comments on 2018-11-17 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
+> This document was automatically generated from source code comments on 2018-11-20 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
