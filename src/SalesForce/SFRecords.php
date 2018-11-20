@@ -28,6 +28,11 @@ class SFRecords {
   protected $_records;
 
   /**
+   * @var string|null
+   */
+  protected $_moreUrl;
+
+  /**
    * SFRecords constructor.
    *
    * Requires the $data argument to contain specific properties:
@@ -53,6 +58,7 @@ class SFRecords {
     $this->_total = (int) $data->totalSize;
     $this->_done = (bool) $data->done;
     $this->_records = $data->records;
+    $this->_moreUrl = $data->nextRecordsUrl ?? null;
   }
 
   /**
@@ -75,6 +81,17 @@ class SFRecords {
   }
 
   /**
+   * If there are more object in SalesForce to fetch, this returns a uri to
+   * retrieve them by. If all records have been returned, this method returns
+   * null instead.
+   *
+   * @return null|string
+   */
+  public function getNextRecordsUrl(): ?string {
+    return $this->_moreUrl;
+  }
+
+  /**
    * Returns an array of SFObjects representing records returned by the
    * SalesForce API.
    *
@@ -84,5 +101,15 @@ class SFRecords {
     return array_map(function($record) {
       return new SFObject($record);
     }, $this->_records);
+  }
+
+  /**
+   * Returns the raw elements underlying this set of records. May return an
+   * array of arrays or an array of \stdClass. Use this method with caution.
+   *
+   * @return array
+   */
+  public function getRecordsRaw(): array {
+    return $this->_records;
   }
 }

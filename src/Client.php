@@ -191,6 +191,14 @@ class Client {
   }
 
   /**
+   * @param string $query
+   * @return SFRecordsResult
+   */
+  public function fullSearch(string $query): SFRecordsResult {
+    return $this->_client->fullQuery($query);
+  }
+
+  /**
    * @param string $name
    * @param array $arguments
    * @internal

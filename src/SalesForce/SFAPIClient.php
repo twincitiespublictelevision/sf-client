@@ -291,6 +291,56 @@ class SFAPIClient {
   }
 
   /**
+   * Performs an multiple queries against the SalesForce query endpoint to
+   * capture all results for a given query.
+   *
+   * This method utilizies the built in SalesForce query response pagination and
+   * should reflect the behavior of following the next page urls.
+   *
+   * If any of the requests fail, the entire query attempt will fail and will
+   * return the erro of the failure.
+   *
+   * This method runs the provided query as-is and does not perform validation
+   * or sanitizion. Consumers of the client should handle these operations prior
+   * to passing the query to the client.
+   *
+   * @param string $query A SOQL query to run
+   * @return SFRecordsResult
+   */
+  public function fullQuery(string $query): SFRecordsResult {
+    $completeRecords = new \stdClass();
+    $completeRecords->totalSize = 0;
+    $completeRecords->done = true;
+    $completeRecords->records = [];
+
+    $request = new Request('GET', 'query?q=' . urlencode($query));
+
+    do {
+      $result = $this->run($request);
+
+      try {
+        $records = new SFRecords($result->value());
+        $completeRecords->totalSize = $records->getTotal();
+        $completeRecords->records = array_merge($completeRecords->records, $records->getRecordsRaw());
+
+        if ($records->getNextRecordsUrl()) {
+          $request = new Request(
+            'GET',
+            substr($records->getNextRecordsUrl(), strpos($records->getNextRecordsUrl(), "query"))
+          );
+        } else {
+          $request = null;
+        }
+
+      } catch (\Exception $e) {
+        return SFRecordsResult::err($e);
+      }
+    } while ($records->hasMore() && $request);
+
+    return SFRecordsResult::ok(new SFRecords($completeRecords));
+  }
+
+  /**
    * Helper function for constructing a SalesForce Object REST uri.
    *
    * @param string $objectType

@@ -559,4 +559,65 @@ class SFAPIClientTest extends TestCase {
     $this->assertTrue($result->isError());
     $this->assertInstanceOf(\Exception::class, $result->getErr());
   }
+
+  public function testFullQueryFollowsPagination() {
+    list($auth, $client) = $this->fixtures();
+
+    $bodies = [
+      '{"totalSize": 3, "done": false, "records": [{"Id": "123"}, {"Id": "456"}], "nextRecordsUrl": "/prefix/query/identifier"}',
+      '{"totalSize": 3, "done": true, "records": [{"Id": "789"}]}'
+    ];
+
+    $sfObjects = [
+      new SFObject(json_decode($bodies[0])->records[0]),
+      new SFObject(json_decode($bodies[0])->records[1]),
+      new SFObject(json_decode($bodies[1])->records[0])
+    ];
+
+    $auth->method('getTokenFromResponse')->willReturn('12345');
+
+    $client->expects($this->exactly(3))
+      ->method('send')
+      ->willReturnOnConsecutiveCalls(
+        new Response(),
+        new Response(200, [], $bodies[0]),
+        new Response(200, [], $bodies[1])
+      );
+
+    $sf = SFAPIClient::connectWith($client, $auth);
+
+    $records = $sf->fullQuery('SELECT Id FROM CONTACTS LIMIT 3')->value();
+
+    $this->assertEquals(3, count($records->getRecords()));
+    $this->assertFalse($records->hasMore());
+    $this->assertEquals($sfObjects, $records->getRecords());
+  }
+
+  public function testFullQueryShortCircuits() {
+    list($auth, $client) = $this->fixtures();
+
+    $bodies = [
+      '{"totalSize": 3, "done": false, "records": [{"Id": "123"}], "nextRecordsUrl": "/prefix/query/identifier"}',
+      'aopwgijawogpiawjegoawijegaw;oeigjawo;ijoigj3409gjagojsegaev', // Second response from the API failed for unknown reason
+      '{"totalSize": 3, "done": true, "records": [{"Id": "789"}]}'
+    ];
+
+    $auth->method('getTokenFromResponse')->willReturn('12345');
+    
+    $client->expects($this->exactly(3))
+      ->method('send')
+      ->willReturnOnConsecutiveCalls(
+        new Response(),
+        new Response(200, [], $bodies[0]),
+        new Response(200, [], $bodies[1]),
+        new Response(200, [], $bodies[2])
+      );
+
+    $sf = SFAPIClient::connectWith($client, $auth);
+
+    $result = $sf->fullQuery('SELECT Id FROM CONTACTS LIMIT 3');
+
+    $this->assertTrue($result->isError());
+    $this->assertInstanceOf(\Exception::class, $result->getErr());
+  }
 }
