@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>SFClient\SalesForce\SFRecords | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="../../css/min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/prism.css">
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700,400italic' rel='stylesheet' type='text/css'>
+        <script src="../../js/prism.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:SFClient_SalesForce_SFRecords" data-root-path="../../">
+            <nav>
+    <div class="container">
+      <div class="title">
+        <a href="../../index.html">API</a>
+      </div>
+      <ul>
+        <li><a href="../../classes.html">Classes</a></li>
+                  <li><a href="../../namespaces.html">Namespaces</a></li>
+                <li><a href="../../interfaces.html">Interfaces</a></li>
+        <li><a href="../../traits.html">Traits</a></li>
+        <li><a href="../../doc-index.html">Index</a></li>
+        <li><a href="../../search.html">Search</a></li>
+      </ul>
+                  <ol class="breadcrumb">
+                                  <li><a href="../../SFClient.html">SFClient</a></li>
+                    <li><a href="../../SFClient/SalesForce.html">SalesForce</a></li>
+  
+            <li>SFRecords</li>
+        </ol>
+        </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+        <div id="control-panel">
+      </div>
+
+        <div id="api-tree"></div>
+
+    </div>
+    <div class="row">
+          <h1>SFRecords</h1>
+
+    <p>    class
+    <strong>SFRecords</strong>
+</p>
+
+            <p>Class SFRecords</p>        <p>A collection of SalesForce Objects. This collection may only contain a
+partial set of the total objects in SalesForce.</p>    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table">
+                    <tr>
+                <td id="property__total">
+                    <code class="language-php">                    protected                                        int</code>
+                </td>
+                <td><code class="language-php">$_total</code></td>
+                <td></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td id="property__done">
+                    <code class="language-php">                    protected                                        bool</code>
+                </td>
+                <td><code class="language-php">$_done</code></td>
+                <td></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td id="property__records">
+                    <code class="language-php">                    protected                                        array</code>
+                </td>
+                <td><code class="language-php">$_records</code></td>
+                <td></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td id="property__moreUrl">
+                    <code class="language-php">                    protected                                        string|null</code>
+                </td>
+                <td><code class="language-php">$_moreUrl</code></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <table class="table">
+            <tr>
+            <td>
+                <code class="language-php">
+                                                            public                                    </code>
+            </td>
+            <td class="text-right"><code class="language-php"></code></td>
+            <td>
+                <code class="language-php"><a href="#method___construct">__construct</a>(<a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a> $data)</code>
+            </td>
+            <td>
+                                    SFRecords constructor.            </td>
+            <td></td>
+        </tr>
+            <tr>
+            <td>
+                <code class="language-php">
+                                                            public                                    </code>
+            </td>
+            <td class="text-right"><code class="language-php">int</code></td>
+            <td>
+                <code class="language-php"><a href="#method_getTotal">getTotal</a>()</code>
+            </td>
+            <td>
+                                    Returns the total number of objects in SalesForce that this partial
+collection was taken from.            </td>
+            <td></td>
+        </tr>
+            <tr>
+            <td>
+                <code class="language-php">
+                                                            public                                    </code>
+            </td>
+            <td class="text-right"><code class="language-php">bool</code></td>
+            <td>
+                <code class="language-php"><a href="#method_hasMore">hasMore</a>()</code>
+            </td>
+            <td>
+                                    Returns true if there are more objects in SalesForce to fetch.            </td>
+            <td></td>
+        </tr>
+            <tr>
+            <td>
+                <code class="language-php">
+                                                            public                                    </code>
+            </td>
+            <td class="text-right"><code class="language-php">string|null</code></td>
+            <td>
+                <code class="language-php"><a href="#method_getNextRecordsUrl">getNextRecordsUrl</a>()</code>
+            </td>
+            <td>
+                                    If there are more object in SalesForce to fetch, this returns a uri to
+retrieve them by. If all records have been returned, this method returns
+null instead.            </td>
+            <td></td>
+        </tr>
+            <tr>
+            <td>
+                <code class="language-php">
+                                                            public                                    </code>
+            </td>
+            <td class="text-right"><code class="language-php">array</code></td>
+            <td>
+                <code class="language-php"><a href="#method_getRecords">getRecords</a>()</code>
+            </td>
+            <td>
+                                    Returns an array of SFObjects representing records returned by the
+SalesForce API.            </td>
+            <td></td>
+        </tr>
+            <tr>
+            <td>
+                <code class="language-php">
+                                                            public                                    </code>
+            </td>
+            <td class="text-right"><code class="language-php">array</code></td>
+            <td>
+                <code class="language-php"><a href="#method_getRecordsRaw">getRecordsRaw</a>()</code>
+            </td>
+            <td>
+                                    Returns the raw elements underlying this set of records. May return an
+array of arrays or an array of \stdClass. Use this method with caution.            </td>
+            <td></td>
+        </tr>
+        </table>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                        <div>
+        <div class="float-right">
+                            at line <a href="#source.45">45</a>
+                    </div>
+        <div>
+            <h3 id="method___construct"><code class="language-php">__construct()</code></h3>
+            <code class="language-php">public __construct(<a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a> $data)</code>
+        </div>
+    </div>
+
+    <div class="details">
+                    <div>
+                                    <p>SFRecords constructor.</p>                    <p>Requires the $data argument to contain specific properties:
+* int totalSize
+* bool done
+* array records</p>            </div>
+                            <h4>Parameters</h4>
+
+                <table class="table">
+                    <tr>
+                <td><code class="language-php"><a target="_blank" href="http://php.net/stdClass"><abbr title="stdClass">stdClass</abbr></a></code></td>
+                <td><code class="language-php">$data</code></td>
+                <td>A successful response object from SalesForce</td>
+            </tr>
+            </table>
+
+        
+        
+        
+            </div>
+
+                        <div>
+        <div class="float-right">
+                            at line <a href="#source.70">70</a>
+                    </div>
+        <div>
+            <h3 id="method_getTotal"><code class="language-php">getTotal()</code></h3>
+            <code class="language-php">public int&nbsp;getTotal()</code>
+        </div>
+    </div>
+
+    <div class="details">
+                    <div>
+                                    <p>Returns the total number of objects in SalesForce that this partial
+collection was taken from.</p>                                </div>
+                
+                    <h4>Return Value</h4>
+
+                <table class="table">
+        <tr>
+            <td><code class="language-php">int</code></td>
+            <td></td>
+        </tr>
+    </table>
+
+        
+        
+            </div>
+
+                        <div>
+        <div class="float-right">
+                            at line <a href="#source.79">79</a>
+                    </div>
+        <div>
+            <h3 id="method_hasMore"><code class="language-php">hasMore()</code></h3>
+            <code class="language-php">public bool&nbsp;hasMore()</code>
+        </div>
+    </div>
+
+    <div class="details">
+                    <div>
+                                    <p>Returns true if there are more objects in SalesForce to fetch.</p>                                </div>
+                
+                    <h4>Return Value</h4>
+
+                <table class="table">
+        <tr>
+            <td><code class="language-php">bool</code></td>
+            <td></td>
+        </tr>
+    </table>
+
+        
+        
+            </div>
+
+                        <div>
+        <div class="float-right">
+                            at line <a href="#source.90">90</a>
+                    </div>
+        <div>
+            <h3 id="method_getNextRecordsUrl"><code class="language-php">getNextRecordsUrl()</code></h3>
+            <code class="language-php">public string|null&nbsp;getNextRecordsUrl()</code>
+        </div>
+    </div>
+
+    <div class="details">
+                    <div>
+                                    <p>If there are more object in SalesForce to fetch, this returns a uri to
+retrieve them by. If all records have been returned, this method returns
+null instead.</p>                                </div>
+                
+                    <h4>Return Value</h4>
+
+                <table class="table">
+        <tr>
+            <td><code class="language-php">string|null</code></td>
+            <td></td>
+        </tr>
+    </table>
+
+        
+        
+            </div>
+
+                        <div>
+        <div class="float-right">
+                            at line <a href="#source.100">100</a>
+                    </div>
+        <div>
+            <h3 id="method_getRecords"><code class="language-php">getRecords()</code></h3>
+            <code class="language-php">public array&nbsp;getRecords()</code>
+        </div>
+    </div>
+
+    <div class="details">
+                    <div>
+                                    <p>Returns an array of SFObjects representing records returned by the
+SalesForce API.</p>                                </div>
+                
+                    <h4>Return Value</h4>
+
+                <table class="table">
+        <tr>
+            <td><code class="language-php">array</code></td>
+            <td></td>
+        </tr>
+    </table>
+
+        
+        
+            </div>
+
+                        <div>
+        <div class="float-right">
+                            at line <a href="#source.112">112</a>
+                    </div>
+        <div>
+            <h3 id="method_getRecordsRaw"><code class="language-php">getRecordsRaw()</code></h3>
+            <code class="language-php">public array&nbsp;getRecordsRaw()</code>
+        </div>
+    </div>
+
+    <div class="details">
+                    <div>
+                                    <p>Returns the raw elements underlying this set of records. May return an
+array of arrays or an array of \stdClass. Use this method with caution.</p>                                </div>
+                
+                    <h4>Return Value</h4>
+
+                <table class="table">
+        <tr>
+            <td><code class="language-php">array</code></td>
+            <td></td>
+        </tr>
+    </table>
+
+        
+        
+            </div>
+
+            </div>
+
+    
+    <h2>Source code</h2>
+    <pre class="language-php line-numbers" id="source"><code>&lt;?php
+
+namespace SFClient\SalesForce;
+
+/**
+ * Class SFRecords
+ *
+ * A collection of SalesForce Objects. This collection may only contain a
+ * partial set of the total objects in SalesForce.
+ *
+ * @package SFClient\SalesForce
+ */
+class SFRecords {
+
+  /**
+   * @var int
+   */
+  protected $_total;
+
+  /**
+   * @var bool
+   */
+  protected $_done;
+
+  /**
+   * @var array
+   */
+  protected $_records;
+
+  /**
+   * @var string|null
+   */
+  protected $_moreUrl;
+
+  /**
+   * SFRecords constructor.
+   *
+   * Requires the $data argument to contain specific properties:
+   * * int totalSize
+   * * bool done
+   * * array records
+   *
+   * @param \stdClass $data A successful response object from SalesForce
+   */
+  public function __construct(\stdClass $data) {
+    if (!isset($data-&gt;totalSize)) {
+      throw new \InvalidArgumentException(&#039;Data is missing a total size property&#039;);
+    }
+
+    if (!isset($data-&gt;done)) {
+      throw new \InvalidArgumentException(&#039;Data is missing a done property&#039;);
+    }
+
+    if (!isset($data-&gt;records)) {
+      throw new \InvalidArgumentException(&#039;Data is missing a records property&#039;);
+    }
+
+    $this-&gt;_total = (int) $data-&gt;totalSize;
+    $this-&gt;_done = (bool) $data-&gt;done;
+    $this-&gt;_records = $data-&gt;records;
+    $this-&gt;_moreUrl = $data-&gt;nextRecordsUrl ?? null;
+  }
+
+  /**
+   * Returns the total number of objects in SalesForce that this partial
+   * collection was taken from.
+   *
+   * @return int
+   */
+  public function getTotal(): int {
+    return $this-&gt;_total;
+  }
+
+  /**
+   * Returns true if there are more objects in SalesForce to fetch.
+   *
+   * @return bool
+   */
+  public function hasMore(): bool {
+    return !$this-&gt;_done;
+  }
+
+  /**
+   * If there are more object in SalesForce to fetch, this returns a uri to
+   * retrieve them by. If all records have been returned, this method returns
+   * null instead.
+   *
+   * @return null|string
+   */
+  public function getNextRecordsUrl(): ?string {
+    return $this-&gt;_moreUrl;
+  }
+
+  /**
+   * Returns an array of SFObjects representing records returned by the
+   * SalesForce API.
+   *
+   * @return SFObject[]
+   */
+  public function getRecords(): array {
+    return array_map(function($record) {
+      return new SFObject($record);
+    }, $this-&gt;_records);
+  }
+
+  /**
+   * Returns the raw elements underlying this set of records. May return an
+   * array of arrays or an array of \stdClass. Use this method with caution.
+   *
+   * @return array
+   */
+  public function getRecordsRaw(): array {
+    return $this-&gt;_records;
+  }
+}</code></pre>
+    </div>
+    <div class="row">
+        <div id="footer">
+    Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a> using <a href="https://github.com/nochso/sami-theme">nochso/sami-theme</a>.
+  </div>
+
+    </div>
+  </div>
+    </body>
+
+</html>
