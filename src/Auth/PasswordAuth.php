@@ -16,7 +16,7 @@ use function SFClient\ex_json_decode;
 class PasswordAuth implements Authentication {
 
   const GRANT_TYPE = 'password';
-  const OAUTH_TOKEN_PATH = 'services/oauth2/token';
+  const OAUTH_TOKEN_URL = 'https://login.salesforce.com/services/oauth2/token';
 
   /**
    * @var string
@@ -61,7 +61,7 @@ class PasswordAuth implements Authentication {
   public function getTokenRequest(): Request {
     return new Request(
       'POST',
-      static::OAUTH_TOKEN_PATH,
+      static::OAUTH_TOKEN_URL,
       ['content-type' => 'application/x-www-form-urlencoded'],
       http_build_query([
         'grant_type' => static::GRANT_TYPE,
