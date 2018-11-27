@@ -7347,7 +7347,7 @@ class Client {
     if ($parts = $this-&gt;getRESTParts($name)) {
       list($method, $type) = $parts;
 
-      $this-&gt;_client-&gt;scope($this-&gt;_types[$type])-&gt;{$method}(...$arguments);
+      return $this-&gt;_client-&gt;scope($this-&gt;_types[$type])-&gt;{$method}(...$arguments);
     }
   }
 
