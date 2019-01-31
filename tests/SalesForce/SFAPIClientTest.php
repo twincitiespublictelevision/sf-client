@@ -124,38 +124,6 @@ class SFAPIClientTest extends TestCase {
     $sf->run(new Request('GET', '/'));
   }
 
-  public function testRetriesFailedGetRequests() {
-    list($auth, $client) = $this->fixtures();
-
-    $auth->method('getTokenFromResponse')->willReturn('12345');
-
-    $status = SFAPIClient::RETRY_STATUSES[0];
-    $error = new RequestException(
-      'Request failure',
-      new Request('GET', '/'),
-      new Response($status, [], '{"message": "server error"}')
-    );
-
-    $errorCallback = $this->returnCallback(function () use ($error) {
-      throw $error;
-    });
-
-    $client->method('send')
-      ->willReturnOnConsecutiveCalls(
-        new Response(),
-        $errorCallback,
-        $errorCallback,
-        $errorCallback
-      );
-
-    $client->expects($this->exactly(4))
-      ->method('send');
-
-    $sf = SFAPIClient::connectWith($client, $auth);
-
-    $sf->get('testType', '0');
-  }
-
   public function testRunHandlesExeceptions() {
     list($auth, $client) = $this->fixtures();
 
@@ -279,7 +247,7 @@ class SFAPIClientTest extends TestCase {
     $error = new RequestException(
       'Request failure',
       new Request('GET', '/'),
-      new Response(500, [], '{"message": "server error"}')
+      new Response(503, [], '{"message": "server error"}')
     );
 
     $auth->method('getTokenFromResponse')->willReturn('12345');
@@ -297,6 +265,38 @@ class SFAPIClientTest extends TestCase {
     $this->assertEquals(SFObjectResult::err($error), $sf->get('testType', '12345'));
   }
 
+  public function testRetriesFailedGetRequests() {
+    list($auth, $client) = $this->fixtures();
+
+    $auth->method('getTokenFromResponse')->willReturn('12345');
+
+    $status = SFAPIClient::RETRY_STATUSES[0];
+    $error = new RequestException(
+      'Request failure',
+      new Request('GET', '/'),
+      new Response($status, [], '{"message": "server error"}')
+    );
+
+    $errorCallback = $this->returnCallback(function () use ($error) {
+      throw $error;
+    });
+
+    $client->method('send')
+      ->willReturnOnConsecutiveCalls(
+        new Response(),
+        $errorCallback,
+        $errorCallback,
+        $errorCallback
+      );
+
+    $client->expects($this->exactly(4))
+      ->method('send');
+
+    $sf = SFAPIClient::connectWith($client, $auth);
+
+    $sf->get('testType', '0');
+  }
+
   public function testGet404ReturnsNulledOk() {
     list($auth, $client) = $this->fixtures();
 
@@ -306,14 +306,18 @@ class SFAPIClientTest extends TestCase {
       new Response(404)
     );
 
+    $errorCallback = $this->returnCallback(function () use ($error) {
+      throw $error;
+    });
+
     $auth->method('getTokenFromResponse')->willReturn('12345');
 
     $client->method('send')
       ->willReturnOnConsecutiveCalls(
         new Response(),
-        $this->returnCallback(function() use ($error) {
-          throw $error;
-        })
+        $errorCallback,
+        $errorCallback,
+        $errorCallback
       );
 
     $sf = SFAPIClient::connectWith($client, $auth);

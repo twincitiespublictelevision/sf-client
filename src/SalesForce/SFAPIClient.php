@@ -191,11 +191,11 @@ class SFAPIClient {
 
       if ($error instanceof RequestException && $error->getResponse()) {
         $errorcode = $error->getResponse()->getStatusCode();
-        if ($errorcode === 404) {
-          return SFObjectResult::ok(null);
-        } elseif (in_array($errorcode, self::RETRY_STATUSES) && $timeout < 1000) {
+        if (in_array($errorcode, self::RETRY_STATUSES) && $timeout < 1000) {
           usleep($timeout);
           return $this->get($objectType, $id, $fields, $timeout * 10);
+        } elseif ($errorcode === 404) {
+          return SFObjectResult::ok(null);
         }
       }
 
