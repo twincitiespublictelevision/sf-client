@@ -40,6 +40,7 @@ use SFClient\Result\Result;
  */
 class SFAPIClient {
   const OBJECT_API = 'sobjects';
+  const RETRY_STATUSES = [ 400, 404, 415, 500 ];
 
   /**
    * @var Client
@@ -181,15 +182,21 @@ class SFAPIClient {
    * @param array $fields SalesForce fields to return
    * @return SFObjectResult
    */
-  public function get(string $objectType, string $id, array $fields = []): SFObjectResult {
+  public function get(string $objectType, string $id, array $fields = [], $timeout = 10): SFObjectResult {
     $fieldQuery = empty($fields) ? '' : '?' . implode(',', $fields);
     $result = $this->run(new Request('GET', $this->o($objectType, $id) . $fieldQuery));
 
     if ($result->isError()) {
       $error = $result->getErr();
 
-      if ($error instanceof RequestException && $error->getResponse() && $error->getResponse()->getStatusCode() === 404) {
-        return SFObjectResult::ok(null);
+      if ($error instanceof RequestException && $error->getResponse()) {
+        $errorcode = $error->getResponse()->getStatusCode();
+        if ($errorcode === 404) {
+          return SFObjectResult::ok(null);
+        } elseif (in_array($errorcode, self::RETRY_STATUSES) && $timeout < 1000) {
+          usleep($timeout);
+          return $this->get($objectType, $id, $fields, $timeout * 10);
+        }
       }
 
       return SFObjectResult::err($result->getErr());

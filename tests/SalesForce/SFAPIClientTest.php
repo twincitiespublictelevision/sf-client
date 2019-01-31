@@ -124,6 +124,38 @@ class SFAPIClientTest extends TestCase {
     $sf->run(new Request('GET', '/'));
   }
 
+  public function testRetriesFailedGetRequests() {
+    list($auth, $client) = $this->fixtures();
+
+    $auth->method('getTokenFromResponse')->willReturn('12345');
+
+    $status = SFAPIClient::RETRY_STATUSES[0];
+    $error = new RequestException(
+      'Request failure',
+      new Request('GET', '/'),
+      new Response($status, [], '{"message": "server error"}')
+    );
+
+    $errorCallback = $this->returnCallback(function () use ($error) {
+      throw $error;
+    });
+
+    $client->method('send')
+      ->willReturnOnConsecutiveCalls(
+        new Response(),
+        $errorCallback,
+        $errorCallback,
+        $errorCallback
+      );
+
+    $client->expects($this->exactly(4))
+      ->method('send');
+
+    $sf = SFAPIClient::connectWith($client, $auth);
+
+    $sf->get('testType', '0');
+  }
+
   public function testRunHandlesExeceptions() {
     list($auth, $client) = $this->fixtures();
 
