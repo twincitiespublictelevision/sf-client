@@ -79,6 +79,13 @@ occur. It is left to the consumer of the client to handle these cases.</p>
                     <p></p>
                 </td>
             </tr>
+                    <tr>
+                <td><code class="language-php">RETRY_STATUSES =  [ 400, 404, 415, 500 ];</code></td>
+                <td>
+                    <p><em></em></p>
+                    <p></p>
+                </td>
+            </tr>
             </table>
 
     
@@ -169,7 +176,7 @@ type.            </td>
             </td>
             <td class="text-right"><code class="language-php"><a href="../../SFClient/Result/SFObjectResult.html"><abbr title="SFClient\Result\SFObjectResult">SFObjectResult</abbr></a></code></td>
             <td>
-                <code class="language-php"><a href="#method_get">get</a>(string $objectType, string $id, array $fields = [])</code>
+                <code class="language-php"><a href="#method_get">get</a>(string $objectType, string $id, array $fields = [], $timeout = 10)</code>
             </td>
             <td>
                                     Fetches a single object of a given type.            </td>
@@ -291,7 +298,7 @@ authentication information attached.            </td>
             <div id="method-details">
                         <div>
         <div class="float-right">
-                            at line <a href="#source.74">74</a>
+                            at line <a href="#source.75">75</a>
                     </div>
         <div>
             <h3 id="method_connect"><code class="language-php">connect()</code></h3>
@@ -347,7 +354,7 @@ and authentication mechanism.</p>                                </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.110">110</a>
+                            at line <a href="#source.111">111</a>
                     </div>
         <div>
             <h3 id="method_connectWith"><code class="language-php">connectWith()</code></h3>
@@ -420,7 +427,7 @@ $sfClient = SFAPIClient::connectWith($client, $auth);
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.139">139</a>
+                            at line <a href="#source.140">140</a>
                     </div>
         <div>
             <h3 id="method_scope"><code class="language-php">scope()</code></h3>
@@ -464,7 +471,7 @@ method are not validated in any way.</p>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.150">150</a>
+                            at line <a href="#source.151">151</a>
                     </div>
         <div>
             <h3 id="method_create"><code class="language-php">create()</code></h3>
@@ -506,11 +513,11 @@ method are not validated in any way.</p>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.184">184</a>
+                            at line <a href="#source.185">185</a>
                     </div>
         <div>
             <h3 id="method_get"><code class="language-php">get()</code></h3>
-            <code class="language-php">public <a href="../../SFClient/Result/SFObjectResult.html"><abbr title="SFClient\Result\SFObjectResult">SFObjectResult</abbr></a>&nbsp;get(string $objectType, string $id, array $fields = [])</code>
+            <code class="language-php">public <a href="../../SFClient/Result/SFObjectResult.html"><abbr title="SFClient\Result\SFObjectResult">SFObjectResult</abbr></a>&nbsp;get(string $objectType, string $id, array $fields = [], $timeout = 10)</code>
         </div>
     </div>
 
@@ -524,17 +531,22 @@ are returned. By default all fields are returned.</p>            </div>
                     <tr>
                 <td><code class="language-php">string</code></td>
                 <td><code class="language-php">$objectType</code></td>
-                <td>SalesForce object type to query for</td>
+                <td></td>
             </tr>
                     <tr>
                 <td><code class="language-php">string</code></td>
                 <td><code class="language-php">$id</code></td>
-                <td>SalesForce object id to query for</td>
+                <td></td>
             </tr>
                     <tr>
                 <td><code class="language-php">array</code></td>
                 <td><code class="language-php">$fields</code></td>
-                <td>SalesForce fields to return</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td><code class="language-php">$timeout</code></td>
+                <td></td>
             </tr>
             </table>
 
@@ -554,7 +566,7 @@ are returned. By default all fields are returned.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.215">215</a>
+                            at line <a href="#source.222">222</a>
                     </div>
         <div>
             <h3 id="method_patch"><code class="language-php">patch()</code></h3>
@@ -601,7 +613,7 @@ are returned. By default all fields are returned.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.243">243</a>
+                            at line <a href="#source.250">250</a>
                     </div>
         <div>
             <h3 id="method_delete"><code class="language-php">delete()</code></h3>
@@ -643,7 +655,7 @@ are returned. By default all fields are returned.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.277">277</a>
+                            at line <a href="#source.284">284</a>
                     </div>
         <div>
             <h3 id="method_query"><code class="language-php">query()</code></h3>
@@ -687,7 +699,7 @@ to passing the query to the client.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.310">310</a>
+                            at line <a href="#source.317">317</a>
                     </div>
         <div>
             <h3 id="method_fullQuery"><code class="language-php">fullQuery()</code></h3>
@@ -733,7 +745,7 @@ to passing the query to the client.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.351">351</a>
+                            at line <a href="#source.358">358</a>
                     </div>
         <div>
             <h3 id="method_o"><code class="language-php">o()</code></h3>
@@ -775,7 +787,7 @@ to passing the query to the client.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.363">363</a>
+                            at line <a href="#source.370">370</a>
                     </div>
         <div>
             <h3 id="method_authenticatedRequest"><code class="language-php">authenticatedRequest()</code></h3>
@@ -813,7 +825,7 @@ authentication information attached.</p>                                </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.383">383</a>
+                            at line <a href="#source.390">390</a>
                     </div>
         <div>
             <h3 id="method_run"><code class="language-php">run()</code></h3>
@@ -850,7 +862,7 @@ authentication information attached.</p>                                </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.398">398</a>
+                            at line <a href="#source.405">405</a>
                     </div>
         <div>
             <h3 id="method__send"><code class="language-php">_send()</code></h3>
@@ -938,6 +950,7 @@ use SFClient\Result\Result;
  */
 class SFAPIClient {
   const OBJECT_API = &#039;sobjects&#039;;
+  const RETRY_STATUSES = [ 400, 404, 415, 500 ];
 
   /**
    * @var Client
@@ -1079,15 +1092,21 @@ class SFAPIClient {
    * @param array $fields SalesForce fields to return
    * @return SFObjectResult
    */
-  public function get(string $objectType, string $id, array $fields = []): SFObjectResult {
+  public function get(string $objectType, string $id, array $fields = [], $timeout = 10): SFObjectResult {
     $fieldQuery = empty($fields) ? &#039;&#039; : &#039;?&#039; . implode(&#039;,&#039;, $fields);
     $result = $this-&gt;run(new Request(&#039;GET&#039;, $this-&gt;o($objectType, $id) . $fieldQuery));
 
     if ($result-&gt;isError()) {
       $error = $result-&gt;getErr();
 
-      if ($error instanceof RequestException &amp;&amp; $error-&gt;getResponse() &amp;&amp; $error-&gt;getResponse()-&gt;getStatusCode() === 404) {
-        return SFObjectResult::ok(null);
+      if ($error instanceof RequestException &amp;&amp; $error-&gt;getResponse()) {
+        $errorcode = $error-&gt;getResponse()-&gt;getStatusCode();
+        if (in_array($errorcode, self::RETRY_STATUSES) &amp;&amp; $timeout &lt; 1000) {
+          usleep($timeout);
+          return $this-&gt;get($objectType, $id, $fields, $timeout * 10);
+        } elseif ($errorcode === 404) {
+          return SFObjectResult::ok(null);
+        }
       }
 
       return SFObjectResult::err($result-&gt;getErr());
