@@ -14,7 +14,7 @@ use SFClient\SalesForce\SFAPIClient;
  * Client for interacting with the SalesForce objects. This client is a small
  * wrapper around an underlying SalesForce API Client. Its purpose is to allow
  * for direct access to objects as opposed to general CRUD methods. By design
- * only base SalesForce objects are supporting by this client.
+ * only base SalesForce objects are supported by this client.
  *
  * ```php
  * $client = new Client(SFAPIClient::connect($endpoint, $auth));
