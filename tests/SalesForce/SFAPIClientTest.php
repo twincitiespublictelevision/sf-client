@@ -367,6 +367,22 @@ class SFAPIClientTest extends TestCase {
     $this->assertInstanceOf(\Exception::class, $result->getErr());
   }
 
+
+  public function testGetWithFields() {
+    list($auth, $client) = $this->fixtures();
+    $body = '{"key": "value", "key2": "value2"}';
+    $auth->method('getTokenFromResponse')->willReturn('12345');
+    $client->method('send')
+           ->willReturnOnConsecutiveCalls(
+             new Response(),
+             new Response(200, [], $body)
+           );
+    $sf = SFAPIClient::connectWith($client, $auth);
+    $sfResultObj = $sf->get('testType', '12345', ['key','value']);
+    $this->assertEquals($sfResultObj->value()->key, 'value');
+    $this->assertEquals($sfResultObj->value()->key2, 'value2');
+  }
+
   /**
    * PATCH
    */
