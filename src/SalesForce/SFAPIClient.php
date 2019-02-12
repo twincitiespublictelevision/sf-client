@@ -181,9 +181,10 @@ class SFAPIClient {
    * @param string $id SalesForce object id to query for
    * @param array $fields SalesForce fields to return
    * @return SFObjectResult
+   * @throws \Exception
    */
   public function get(string $objectType, string $id, array $fields = [], $timeout = 10): SFObjectResult {
-    $fieldQuery = empty($fields) ? '' : '?' . implode(',', $fields);
+    $fieldQuery = empty($fields) ? '' : '?fields=' . implode(',', $fields);
     $result = $this->run(new Request('GET', $this->o($objectType, $id) . $fieldQuery));
 
     if ($result->isError()) {
