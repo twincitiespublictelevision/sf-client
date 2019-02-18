@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>SFClient\SalesForce\SFAPIClient | API</title>
+    <title>SFClient\SalesForce\ReconnectingSFAPIClient | API</title>
 
             <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
         <link rel="stylesheet" type="text/css" href="../../css/min.css">
@@ -17,7 +17,7 @@
     
     </head>
 
-    <body id="class" data-name="class:SFClient_SalesForce_SFAPIClient" data-root-path="../../">
+    <body id="class" data-name="class:SFClient_SalesForce_ReconnectingSFAPIClient" data-root-path="../../">
             <nav>
     <div class="container">
       <div class="title">
@@ -35,7 +35,7 @@
                                   <li><a href="../../SFClient.html">SFClient</a></li>
                     <li><a href="../../SFClient/SalesForce.html">SalesForce</a></li>
   
-            <li>SFAPIClient</li>
+            <li>ReconnectingSFAPIClient</li>
         </ol>
         </div>
   </nav>
@@ -49,25 +49,15 @@
 
     </div>
     <div class="row">
-          <h1>SFAPIClient</h1>
+          <h1>ReconnectingSFAPIClient</h1>
 
     <p>    class
-    <strong>SFAPIClient</strong>
+    <strong>ReconnectingSFAPIClient</strong>        extends <a href="../../SFClient/SalesForce/SFAPIClient.html"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a>
 </p>
 
-            <p>Class SFAPIClient</p>        <p>A general purpose client for communicating with the SalesForce API. This
-client only implements the base functionality for handling CRUD operations as
-where as arbitrary query execution.</p>
-
-<p>On construction a client will attempt to authenticate against the supplied
-SalesForce endpoint immediately. An exception will be thrown if this call
-is not successful. At this point the returned token is stored for later use,
-and the credentials for authentication are thrown away.</p>
-
-<p>The client will not attempt to re-authenticate if later API calls generate
-authentication failures. If the client is left in use by a long running
-process that outlives the lifetime of the access token, then this case may
-occur. It is left to the consumer of the client to handle these cases.</p>    
+            <p>Class ReconnectingSFAPIClient</p>        <p>An extension of the SalesForce API Client that will make
+a second authorization attempt if the first run attempt results in a
+401 Error.</p>    
     
             <h2>Constants</h2>
 
@@ -98,7 +88,7 @@ occur. It is left to the consumer of the client to handle these cases.</p>
                 </td>
                 <td><code class="language-php">$_client</code></td>
                 <td></td>
-                <td></td>
+                <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#property__client"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
             </tr>
                     <tr>
                 <td id="property__token">
@@ -106,7 +96,7 @@ occur. It is left to the consumer of the client to handle these cases.</p>
                 </td>
                 <td><code class="language-php">$_token</code></td>
                 <td></td>
-                <td></td>
+                <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#property__token"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
             </tr>
             </table>
 
@@ -121,10 +111,10 @@ occur. It is left to the consumer of the client to handle these cases.</p>
             </td>
             <td class="text-right"><code class="language-php"></code></td>
             <td>
-                <code class="language-php"><a href="#method___construct">__construct</a>(<abbr title="GuzzleHttp\Client">Client</abbr> $client, string $token)</code>
+                <code class="language-php"><a href="#method___construct">__construct</a>(<abbr title="GuzzleHttp\Client">Client</abbr> $client, string $token, <a href="../../SFClient/Auth/Authentication.html"><abbr title="SFClient\Auth\Authentication">Authentication</abbr></a> $auth)</code>
             </td>
             <td>
-                                    SFClient constructor.            </td>
+                                    ReconnectingSFClient constructor.            </td>
             <td></td>
         </tr>
             <tr>
@@ -139,7 +129,7 @@ occur. It is left to the consumer of the client to handle these cases.</p>
             <td>
                                     Constructs a new SalesForce API client with a given SalesForce API endpoint
 and authentication mechanism.            </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method_connect"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
             <tr>
             <td>
@@ -152,7 +142,8 @@ and authentication mechanism.            </td>
             </td>
             <td>
                                     Constructs a new SalesForce API client with a custom Http client and the
-given authentication mechanism.            </td>
+given authentication mechanism.  Extended from SFAPIClient::connectWith() to
+include $auth in the construction of the ReconnectingSFAPIClient.            </td>
             <td></td>
         </tr>
             <tr>
@@ -167,7 +158,7 @@ given authentication mechanism.            </td>
             <td>
                                     Constructs a new SalesForce API client that is scoped to a specific object
 type.            </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method_scope"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
             <tr>
             <td>
@@ -180,7 +171,7 @@ type.            </td>
             </td>
             <td>
                                     Performs a create operation for a given type.            </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method_create"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
             <tr>
             <td>
@@ -193,7 +184,7 @@ type.            </td>
             </td>
             <td>
                                     Fetches a single object of a given type.            </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method_get"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
             <tr>
             <td>
@@ -206,7 +197,7 @@ type.            </td>
             </td>
             <td>
                                     Updates a single object of a given type with the given id.            </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method_patch"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
             <tr>
             <td>
@@ -219,7 +210,7 @@ type.            </td>
             </td>
             <td>
                                     Deletes a single object of a given type with the given id.            </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method_delete"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
             <tr>
             <td>
@@ -233,7 +224,7 @@ type.            </td>
             <td>
                                     Performs an arbitrary query against the SalesForce query endpoint and
 returns the results.            </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method_query"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
             <tr>
             <td>
@@ -247,7 +238,7 @@ returns the results.            </td>
             <td>
                                     Performs an multiple queries against the SalesForce query endpoint to
 capture all results for a given query.            </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method_fullQuery"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
             <tr>
             <td>
@@ -260,7 +251,7 @@ capture all results for a given query.            </td>
             </td>
             <td>
                                     Helper function for constructing a SalesForce Object REST uri.            </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method_o"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
             <tr>
             <td>
@@ -274,7 +265,7 @@ capture all results for a given query.            </td>
             <td>
                                     Given an arbitrary request, returns a new request with the client stored
 authentication information attached.            </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method_authenticatedRequest"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
             <tr>
             <td>
@@ -283,10 +274,11 @@ authentication information attached.            </td>
             </td>
             <td class="text-right"><code class="language-php"><a href="../../SFClient/Result/Result.html"><abbr title="SFClient\Result\Result">Result</abbr></a></code></td>
             <td>
-                <code class="language-php"><a href="#method_run">run</a>(<abbr title="GuzzleHttp\Psr7\Request">Request</abbr> $request)</code>
+                <code class="language-php"><a href="#method_run">run</a>(<abbr title="GuzzleHttp\Psr7\Request">Request</abbr> $request, boolean $retry = true)</code>
             </td>
             <td>
-                                    Executes an arbitrary request against the SalesForce API            </td>
+                                    Executes an arbitrary request against the SalesForce API.  Extended from
+SFAPICLient to attempt reauthorization if the request fails due to a 401 error            </td>
             <td></td>
         </tr>
             <tr>
@@ -301,7 +293,7 @@ authentication information attached.            </td>
             <td>
                                     No description
                             </td>
-            <td></td>
+            <td><small>from&nbsp;<a href="../../SFClient/SalesForce/SFAPIClient.html#method__send"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></small></td>
         </tr>
         </table>
 
@@ -311,17 +303,17 @@ authentication information attached.            </td>
             <div id="method-details">
                         <div>
         <div class="float-right">
-                            at line <a href="#source.60">60</a>
+                            at line <a href="#source.30">30</a>
                     </div>
         <div>
             <h3 id="method___construct"><code class="language-php">__construct()</code></h3>
-            <code class="language-php">protected __construct(<abbr title="GuzzleHttp\Client">Client</abbr> $client, string $token)</code>
+            <code class="language-php">protected __construct(<abbr title="GuzzleHttp\Client">Client</abbr> $client, string $token, <a href="../../SFClient/Auth/Authentication.html"><abbr title="SFClient\Auth\Authentication">Authentication</abbr></a> $auth)</code>
         </div>
     </div>
 
     <div class="details">
                     <div>
-                                    <p>SFClient constructor.</p>                                </div>
+                                    <p>ReconnectingSFClient constructor.</p>                                </div>
                             <h4>Parameters</h4>
 
                 <table class="table">
@@ -335,6 +327,11 @@ authentication information attached.            </td>
                 <td><code class="language-php">$token</code></td>
                 <td></td>
             </tr>
+                    <tr>
+                <td><code class="language-php"><a href="../../SFClient/Auth/Authentication.html"><abbr title="SFClient\Auth\Authentication">Authentication</abbr></a></code></td>
+                <td><code class="language-php">$auth</code></td>
+                <td></td>
+            </tr>
             </table>
 
         
@@ -344,7 +341,7 @@ authentication information attached.            </td>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.75">75</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method_connect"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 75
                     </div>
         <div>
             <h3 id="method_connect"><code class="language-php">connect()</code></h3>
@@ -400,7 +397,7 @@ and authentication mechanism.</p>                                </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.111">111</a>
+                            at line <a href="#source.46">46</a>
                     </div>
         <div>
             <h3 id="method_connectWith"><code class="language-php">connectWith()</code></h3>
@@ -411,24 +408,8 @@ and authentication mechanism.</p>                                </div>
     <div class="details">
                     <div>
                                     <p>Constructs a new SalesForce API client with a custom Http client and the
-given authentication mechanism.</p>                    <p>It is expected that the caller has correctly configured the Http client
-ahead of time with the appropriate
-SalesForce base endpoint url.</p>
-
-<pre><code class="php">$auth = new PasswordAuth(
-  'key',
-  'secret',
-  'user',
-  'pass'
-);
-
-$client = new Client([
-  'base_uri' =&gt; 'https://my.endpoint.salesforce.com/services/data/v12.3/'
-]);
-
-$sfClient = SFAPIClient::connectWith($client, $auth);
-</code></pre>
-</p>            </div>
+given authentication mechanism.  Extended from SFAPIClient::connectWith() to
+include $auth in the construction of the ReconnectingSFAPIClient.</p>                                </div>
                             <h4>Parameters</h4>
 
                 <table class="table">
@@ -473,7 +454,7 @@ $sfClient = SFAPIClient::connectWith($client, $auth);
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.140">140</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method_scope"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 140
                     </div>
         <div>
             <h3 id="method_scope"><code class="language-php">scope()</code></h3>
@@ -517,7 +498,7 @@ method are not validated in any way.</p>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.151">151</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method_create"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 151
                     </div>
         <div>
             <h3 id="method_create"><code class="language-php">create()</code></h3>
@@ -559,7 +540,7 @@ method are not validated in any way.</p>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.186">186</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method_get"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 186
                     </div>
         <div>
             <h3 id="method_get"><code class="language-php">get()</code></h3>
@@ -621,7 +602,7 @@ are returned. By default all fields are returned.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.223">223</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method_patch"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 223
                     </div>
         <div>
             <h3 id="method_patch"><code class="language-php">patch()</code></h3>
@@ -668,7 +649,7 @@ are returned. By default all fields are returned.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.251">251</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method_delete"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 251
                     </div>
         <div>
             <h3 id="method_delete"><code class="language-php">delete()</code></h3>
@@ -710,7 +691,7 @@ are returned. By default all fields are returned.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.285">285</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method_query"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 285
                     </div>
         <div>
             <h3 id="method_query"><code class="language-php">query()</code></h3>
@@ -754,7 +735,7 @@ to passing the query to the client.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.318">318</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method_fullQuery"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 318
                     </div>
         <div>
             <h3 id="method_fullQuery"><code class="language-php">fullQuery()</code></h3>
@@ -800,7 +781,7 @@ to passing the query to the client.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.359">359</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method_o"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 359
                     </div>
         <div>
             <h3 id="method_o"><code class="language-php">o()</code></h3>
@@ -842,7 +823,7 @@ to passing the query to the client.</p>            </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.371">371</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method_authenticatedRequest"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 371
                     </div>
         <div>
             <h3 id="method_authenticatedRequest"><code class="language-php">authenticatedRequest()</code></h3>
@@ -880,23 +861,29 @@ authentication information attached.</p>                                </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.391">391</a>
+                            at line <a href="#source.71">71</a>
                     </div>
         <div>
             <h3 id="method_run"><code class="language-php">run()</code></h3>
-            <code class="language-php">public <a href="../../SFClient/Result/Result.html"><abbr title="SFClient\Result\Result">Result</abbr></a>&nbsp;run(<abbr title="GuzzleHttp\Psr7\Request">Request</abbr> $request)</code>
+            <code class="language-php">public <a href="../../SFClient/Result/Result.html"><abbr title="SFClient\Result\Result">Result</abbr></a>&nbsp;run(<abbr title="GuzzleHttp\Psr7\Request">Request</abbr> $request, boolean $retry = true)</code>
         </div>
     </div>
 
     <div class="details">
                     <div>
-                                    <p>Executes an arbitrary request against the SalesForce API</p>                                </div>
+                                    <p>Executes an arbitrary request against the SalesForce API.  Extended from
+SFAPICLient to attempt reauthorization if the request fails due to a 401 error</p>                                </div>
                             <h4>Parameters</h4>
 
                 <table class="table">
                     <tr>
                 <td><code class="language-php"><abbr title="GuzzleHttp\Psr7\Request">Request</abbr></code></td>
                 <td><code class="language-php">$request</code></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><code class="language-php">boolean</code></td>
+                <td><code class="language-php">$retry</code></td>
                 <td></td>
             </tr>
             </table>
@@ -917,7 +904,7 @@ authentication information attached.</p>                                </div>
 
                         <div>
         <div class="float-right">
-                            at line <a href="#source.406">406</a>
+                            in <a href="../../SFClient/SalesForce/SFAPIClient.html#method__send"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a> at line 406
                     </div>
         <div>
             <h3 id="method__send"><code class="language-php">_send()</code></h3>
@@ -967,107 +954,42 @@ authentication information attached.</p>                                </div>
 
 namespace SFClient\SalesForce;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
-use function SFClient\ex_json_decode;
-use function SFClient\ex_json_encode;
-use SFClient\Result\BoolResult;
-use SFClient\Result\SFCreationResult;
-use SFClient\Result\SFObjectResult;
-use SFClient\Result\SFRecordsResult;
-use SFClient\SalesForce\SFCreation;
-use SFClient\SalesForce\SFRecords;
-use SFClient\SalesForce\SFObject;
-use SFClient\Auth\Authentication;
-use SFClient\Endpoint\Endpoint;
-use SFClient\Exceptions\FailedToAuthenticate;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use SFClient\Result\Result;
+use SFClient\Auth\Authentication;
+use SFClient\Exceptions\FailedToAuthenticate;
 
 /**
- * Class SFAPIClient
+ * Class ReconnectingSFAPIClient
  *
- * A general purpose client for communicating with the SalesForce API. This
- * client only implements the base functionality for handling CRUD operations as
- * where as arbitrary query execution.
- *
- * On construction a client will attempt to authenticate against the supplied
- * SalesForce endpoint immediately. An exception will be thrown if this call
- * is not successful. At this point the returned token is stored for later use,
- * and the credentials for authentication are thrown away.
- *
- * The client will not attempt to re-authenticate if later API calls generate
- * authentication failures. If the client is left in use by a long running
- * process that outlives the lifetime of the access token, then this case may
- * occur. It is left to the consumer of the client to handle these cases.
+ * An extension of the SalesForce API Client that will make
+ * a second authorization attempt if the first run attempt results in a
+ * 401 Error.
  *
  * @package SFClient\SalesForce
  */
-class SFAPIClient {
-  const OBJECT_API = &#039;sobjects&#039;;
-  const RETRY_STATUSES = [ 400, 404, 415, 500 ];
+class ReconnectingSFAPIClient extends SFAPIClient {
+  private $_auth;
 
   /**
-   * @var Client
-   */
-  protected $_client;
-
-  /**
-   * @var string
-   */
-  protected $_token;
-
-  /**
-   * SFClient constructor.
+   * ReconnectingSFClient constructor.
    * @param Client $client
    * @param string $token
+   * @param Authentication $auth
    */
-  protected function __construct(Client $client, string $token) {
-    $this-&gt;_client = $client;
-    $this-&gt;_token = $token;
-  }
-
-  /**
-   * Constructs a new SalesForce API client with a given SalesForce API endpoint
-   * and authentication mechanism.
-   *
-   * @param Endpoint $endpoint SalesForce endpoint to make calls against
-   * @param Authentication $auth SalesForce authentication mechanism
-   * @return SFAPIClient
-   * @throws FailedToAuthenticate
-   * @throws \GuzzleHttp\Exception\GuzzleException
-   */
-  public static function connect(Endpoint $endpoint, Authentication $auth): SFAPIClient {
-    $client = new Client([
-      &#039;base_uri&#039; =&gt; $endpoint-&gt;getUrl()
-    ]);
-
-    return static::connectWith($client, $auth);
+  protected function __construct(Client $client, string $token, Authentication $auth) {
+    parent::__construct($client, $token);
+    $this-&gt;_auth = $auth;
   }
 
   /**
    * Constructs a new SalesForce API client with a custom Http client and the
-   * given authentication mechanism.
+   * given authentication mechanism.  Extended from SFAPIClient::connectWith() to
+   * include $auth in the construction of the ReconnectingSFAPIClient.
    *
-   * It is expected that the caller has correctly configured the Http client
-   * ahead of time with the appropriate
-   * SalesForce base endpoint url.
-   * ```php
-   * $auth = new PasswordAuth(
-   *   &#039;key&#039;,
-   *   &#039;secret&#039;,
-   *   &#039;user&#039;,
-   *   &#039;pass&#039;
-   * );
-   *
-   * $client = new Client([
-   *   &#039;base_uri&#039; =&gt; &#039;https://my.endpoint.salesforce.com/services/data/v12.3/&#039;
-   * ]);
-   *
-   * $sfClient = SFAPIClient::connectWith($client, $auth);
-   * ```
-   *
-   * @param Client $client Http client that will be used by the SFAPIClient to communicate with the SalesForce API
+   * @param Client $client Http client that will be used by the ReconnectingSFAPIClient to communicate with the SalesForce API
    * @param Authentication $auth SalesForce authentication mechanism
    * @return SFAPIClient
    * @throws FailedToAuthenticate
@@ -1082,300 +1004,46 @@ class SFAPIClient {
       throw new FailedToAuthenticate();
     }
 
-    return new SFAPIClient(
+    return new ReconnectingSFAPIClient(
       $client,
-      $token
+      $token,
+      $auth
     );
   }
 
   /**
-   * Constructs a new SalesForce API client that is scoped to a specific object
-   * type.
-   *
-   * Note that this re-uses the Http client of the SalesForce API client
-   * that was used to create the scoped client. Object types passed to the
-   * method are not validated in any way.
-   * ```php
-   * $contacts = $client-&gt;scope(&#039;Contact&#039;);
-   * ```
-   *
-   * @param string $objectType SalesForce object type to create a client for
-   * @return ScopedSFAPIClient
-   */
-  public function scope(string $objectType): ScopedSFAPIClient {
-    return new ScopedSFAPIClient($this, $objectType);
-  }
-
-  /**
-   * Performs a create operation for a given type.
-   *
-   * @param string $objectType SalesForce object type to create
-   * @param array $data Field data to create the object with
-   * @return SFCreationResult
-   */
-  public function create(string $objectType, array $data): SFCreationResult {
-    $result = $this-&gt;run(
-      new Request(
-        &#039;POST&#039;,
-        $this-&gt;o($objectType, &#039;&#039;),
-        [&#039;content-type&#039; =&gt; &#039;application/json&#039;],
-        ex_json_encode($data)
-      )
-    );
-
-    if ($result-&gt;isError()) {
-      return SFCreationResult::err($result-&gt;getErr());
-    }
-
-    $response = $result-&gt;value();
-
-    if ($response &amp;&amp; $response instanceof \stdClass) {
-      return SFCreationResult::ok(new SFCreation($response));
-    }
-
-    return SFCreationResult::err(new \Exception(&#039;Failed to handle create response&#039;));
-  }
-
-  /**
-   * Fetches a single object of a given type.
-   *
-   * The optional `$fields` argument may be used to restrict the fields that
-   * are returned. By default all fields are returned.
-   *
-   * @param string $objectType SalesForce object type to query for
-   * @param string $id SalesForce object id to query for
-   * @param array $fields SalesForce fields to return
-   * @return SFObjectResult
-   * @throws \Exception
-   */
-  public function get(string $objectType, string $id, array $fields = [], $timeout = 10): SFObjectResult {
-    $fieldQuery = empty($fields) ? &#039;&#039; : &#039;?fields=&#039; . implode(&#039;,&#039;, $fields);
-    $result = $this-&gt;run(new Request(&#039;GET&#039;, $this-&gt;o($objectType, $id) . $fieldQuery));
-
-    if ($result-&gt;isError()) {
-      $error = $result-&gt;getErr();
-
-      if ($error instanceof RequestException &amp;&amp; $error-&gt;getResponse()) {
-        $errorcode = $error-&gt;getResponse()-&gt;getStatusCode();
-        if (in_array($errorcode, self::RETRY_STATUSES) &amp;&amp; $timeout &lt; 1000) {
-          usleep($timeout);
-          return $this-&gt;get($objectType, $id, $fields, $timeout * 10);
-        } elseif ($errorcode === 404) {
-          return SFObjectResult::ok(null);
-        }
-      }
-
-      return SFObjectResult::err($result-&gt;getErr());
-    }
-
-    $response = $result-&gt;value();
-
-    if ($response &amp;&amp; $response instanceof \stdClass) {
-      return SFObjectResult::ok(new SFObject($response));
-    }
-
-    return SFObjectResult::err(new \Exception(&#039;Failed to handle get response&#039;));
-  }
-
-  /**
-   * Updates a single object of a given type with the given id.
-   *
-   * @param string $objectType SalesForce object type to update
-   * @param string $id SalesForce id type to update
-   * @param array $data Field data to update the object with
-   * @return BoolResult
-   */
-  public function patch(string $objectType, string $id, array $data): BoolResult {
-    $result = $this-&gt;run(
-      new Request(
-        &#039;PATCH&#039;,
-        $this-&gt;o($objectType, $id),
-        [&#039;content-type&#039; =&gt; &#039;application/json&#039;],
-        ex_json_encode($data)
-      )
-    );
-
-    if ($result-&gt;isError()) {
-      return BoolResult::err($result-&gt;getErr());
-    }
-
-    if ($result-&gt;value() === null) {
-      return BoolResult::ok(true);
-    }
-
-    return BoolResult::ok(false);
-  }
-
-  /**
-   * Deletes a single object of a given type with the given id.
-   *
-   * @param string $objectType SalesForce object type to delete
-   * @param string $id SalesForce id type to delete
-   * @return BoolResult
-   */
-  public function delete(string $objectType, string $id): BoolResult {
-    $result = $this-&gt;run(
-      new Request(
-        &#039;PATCH&#039;,
-        $this-&gt;o($objectType, $id)
-      )
-    );
-
-    if ($result-&gt;isError()) {
-      return BoolResult::err($result-&gt;getErr());
-    }
-
-    if ($result-&gt;value() === null) {
-      return BoolResult::ok(true);
-    }
-
-    return BoolResult::ok(false);
-  }
-
-  /**
-   * Performs an arbitrary query against the SalesForce query endpoint and
-   * returns the results.
-   *
-   * The results returned may not represent all of the objects in SalesForce
-   * that match the given query. Records up to the limit set by SalesForce are
-   * returned.
-   *
-   * This method runs the provided query as-is and does not perform validation
-   * or sanitizion. Consumers of the client should handle these operations prior
-   * to passing the query to the client.
-   *
-   * @param string $query A SOQL query to run
-   * @return SFRecordsResult
-   */
-  public function query(string $query): SFRecordsResult {
-    $result = $this-&gt;run(new Request(&#039;GET&#039;, &#039;query?q=&#039; . urlencode($query)));
-
-    if ($result-&gt;isError()) {
-      return SFRecordsResult::err($result-&gt;getErr());
-    }
-
-    $response = $result-&gt;value();
-
-    if ($response &amp;&amp; $response instanceof \stdClass) {
-      return SFRecordsResult::ok(new SFRecords($response));
-    }
-
-    return SFRecordsResult::err(new \Exception(&#039;Failed to handle query response&#039;));
-  }
-
-  /**
-   * Performs an multiple queries against the SalesForce query endpoint to
-   * capture all results for a given query.
-   *
-   * This method utilizies the built in SalesForce query response pagination and
-   * should reflect the behavior of following the next page urls.
-   *
-   * If any of the requests fail, the entire query attempt will fail and will
-   * return the erro of the failure.
-   *
-   * This method runs the provided query as-is and does not perform validation
-   * or sanitizion. Consumers of the client should handle these operations prior
-   * to passing the query to the client.
-   *
-   * @param string $query A SOQL query to run
-   * @return SFRecordsResult
-   */
-  public function fullQuery(string $query): SFRecordsResult {
-    $completeRecords = new \stdClass();
-    $completeRecords-&gt;totalSize = 0;
-    $completeRecords-&gt;done = true;
-    $completeRecords-&gt;records = [];
-
-    $request = new Request(&#039;GET&#039;, &#039;query?q=&#039; . urlencode($query));
-
-    do {
-      $result = $this-&gt;run($request);
-
-      try {
-        $records = new SFRecords($result-&gt;value());
-        $completeRecords-&gt;totalSize = $records-&gt;getTotal();
-        $completeRecords-&gt;records = array_merge($completeRecords-&gt;records, $records-&gt;getRecordsRaw());
-
-        if ($records-&gt;getNextRecordsUrl()) {
-          $request = new Request(
-            &#039;GET&#039;,
-            substr($records-&gt;getNextRecordsUrl(), strpos($records-&gt;getNextRecordsUrl(), &quot;query&quot;))
-          );
-        } else {
-          $request = null;
-        }
-
-      } catch (\Exception $e) {
-        return SFRecordsResult::err($e);
-      }
-    } while ($records-&gt;hasMore() &amp;&amp; $request);
-
-    return SFRecordsResult::ok(new SFRecords($completeRecords));
-  }
-
-  /**
-   * Helper function for constructing a SalesForce Object REST uri.
-   *
-   * @param string $objectType
-   * @param string $id
-   * @return string
-   * @internal
-   */
-  public function o(string $objectType, string $id = &#039;&#039;): string {
-    return self::OBJECT_API . &quot;/{$objectType}&quot; . ($id ? &quot;/${id}&quot; : &#039;&#039;);
-  }
-
-  /**
-   * Given an arbitrary request, returns a new request with the client stored
-   * authentication information attached.
+   * Executes an arbitrary request against the SalesForce API.  Extended from
+   * SFAPICLient to attempt reauthorization if the request fails due to a 401 error
    *
    * @param Request $request
-   * @return Request
-   * @internal
-   */
-  public function authenticatedRequest(Request $request): Request {
-
-    /**
-     * withAddedHeader belongs to MessageTrait. PHPDoc to hint the returned
-     * value is of the same type as the initial value.
-     *
-     * @var Request $req
-     */
-    $req = $request-&gt;withAddedHeader(&#039;Authorization&#039;, &quot;Bearer {$this-&gt;_token}&quot;);
-
-    return $req;
-  }
-
-  /**
-   * Executes an arbitrary request against the SalesForce API
-   *
-   * @param Request $request
+   * @param boolean $retry
    * @return Result
    * @internal
    */
-  public function run(Request $request): Result {
+  public function run(Request $request, $retry = true): Result {
     try {
       return Result::ok($this-&gt;_send(
         $this-&gt;authenticatedRequest($request)
       ));
+    } catch (ClientException $e) {
+      if ($e-&gt;getCode() == 401 &amp;&amp; $retry) {
+        // Create new auth token and try again
+        $token = $this-&gt;_auth-&gt;getTokenFromResponse(
+          $this-&gt;_client-&gt;send($this-&gt;_auth-&gt;getTokenRequest())
+        );
+
+        if ($token === null) {
+          return Result::err(new FailedToAuthenticate());
+        }
+
+        $this-&gt;_token = $token;
+        return $this-&gt;run($request, false);
+      }
+
+      return Result::err($e);
     } catch (\Exception $e) {
       return Result::err($e);
     }
-  }
-
-  /**
-   * @param Request $request
-   * @return mixed
-   * @throws \GuzzleHttp\Exception\GuzzleException
-   */
-  protected function _send(Request $request) {
-    $body = $this-&gt;_client-&gt;send($request)-&gt;getBody();
-
-    if ($body &amp;&amp; $body-&gt;getContents() === &quot;&quot;) {
-      return null;
-    }
-
-    return ex_json_decode($body);
   }
 }</code></pre>
     </div>

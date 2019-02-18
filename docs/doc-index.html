@@ -358,6 +358,11 @@ authentication information attached.</td>        </tr>    </table><h2 id="letter
           <td>  <a href="SFClient/NPSPClient.html#method_createUserProvisioningRequest">createUserProvisioningRequest</a>()</td>
           <td><a href="SFClient/NPSPClient.html"><abbr title="SFClient\NPSPClient">NPSPClient</abbr></a></td>
           <td></td>        </tr>        <tr><td><div class="circle circle-m">M</div></td>
+          <td>  <a href="SFClient/SalesForce/ReconnectingSFAPIClient.html#method_connectWith">connectWith</a>()</td>
+          <td><a href="SFClient/SalesForce/ReconnectingSFAPIClient.html"><abbr title="SFClient\SalesForce\ReconnectingSFAPIClient">ReconnectingSFAPIClient</abbr></a></td>
+          <td>Constructs a new SalesForce API client with a custom Http client and the
+given authentication mechanism.  Extended from SFAPIClient::connectWith() to
+include $auth in the construction of the ReconnectingSFAPIClient.</td>        </tr>        <tr><td><div class="circle circle-m">M</div></td>
           <td>  <a href="SFClient/SalesForce/SFAPIClient.html#method_connect">connect</a>()</td>
           <td><a href="SFClient/SalesForce/SFAPIClient.html"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></td>
           <td>Constructs a new SalesForce API client with a given SalesForce API endpoint
@@ -1335,7 +1340,14 @@ returns the results.</td>        </tr>    </table><h2 id="letterR">R</h2>
               <tr><td><div class="circle circle-c">C</div></td>
           <td><a href="SFClient/Result/Result.html"><abbr title="SFClient\Result\Result">Result</abbr></a></td>
           <td><a href="SFClient/Result.html">SFClient\Result</a></td>
-          <td>Class Result</td>        </tr>        <tr><td><div class="circle circle-m">M</div></td>
+          <td>Class Result</td>        </tr>        <tr><td><div class="circle circle-c">C</div></td>
+          <td><a href="SFClient/SalesForce/ReconnectingSFAPIClient.html"><abbr title="SFClient\SalesForce\ReconnectingSFAPIClient">ReconnectingSFAPIClient</abbr></a></td>
+          <td><a href="SFClient/SalesForce.html">SFClient\SalesForce</a></td>
+          <td>Class ReconnectingSFAPIClient</td>        </tr>        <tr><td><div class="circle circle-m">M</div></td>
+          <td>  <a href="SFClient/SalesForce/ReconnectingSFAPIClient.html#method_run">run</a>()</td>
+          <td><a href="SFClient/SalesForce/ReconnectingSFAPIClient.html"><abbr title="SFClient\SalesForce\ReconnectingSFAPIClient">ReconnectingSFAPIClient</abbr></a></td>
+          <td>Executes an arbitrary request against the SalesForce API.  Extended from
+SFAPICLient to attempt reauthorization if the request fails due to a 401 error</td>        </tr>        <tr><td><div class="circle circle-m">M</div></td>
           <td>  <a href="SFClient/SalesForce/SFAPIClient.html#method_run">run</a>()</td>
           <td><a href="SFClient/SalesForce/SFAPIClient.html"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></td>
           <td>Executes an arbitrary request against the SalesForce API</td>        </tr>    </table><h2 id="letterS">S</h2>
@@ -1499,13 +1511,19 @@ returned.</td>        </tr>        <tr><td><div class="circle circle-m">M</div><
           <td></td>        </tr>        <tr><td><div class="circle circle-m">M</div></td>
           <td>  <a href="SFClient/Result/SFRecordsResult.html#method___construct">__construct</a>()</td>
           <td><a href="SFClient/Result/SFRecordsResult.html"><abbr title="SFClient\Result\SFRecordsResult">SFRecordsResult</abbr></a></td>
-          <td>SFRecords constructor.</td>        </tr>        <tr><td><div class="circle circle-p">P</div></td>
+          <td>SFRecords constructor.</td>        </tr>        <tr><td><div class="circle circle-m">M</div></td>
+          <td>  <a href="SFClient/SalesForce/ReconnectingSFAPIClient.html#method___construct">__construct</a>()</td>
+          <td><a href="SFClient/SalesForce/ReconnectingSFAPIClient.html"><abbr title="SFClient\SalesForce\ReconnectingSFAPIClient">ReconnectingSFAPIClient</abbr></a></td>
+          <td>ReconnectingSFClient constructor.</td>        </tr>        <tr><td><div class="circle circle-p">P</div></td>
           <td>$<a href="SFClient/SalesForce/SFAPIClient.html#property__client"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></td>
           <td><a href="SFClient/SalesForce/SFAPIClient.html"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></td>
           <td></td>        </tr>        <tr><td><div class="circle circle-p">P</div></td>
           <td>$<a href="SFClient/SalesForce/SFAPIClient.html#property__token"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></td>
           <td><a href="SFClient/SalesForce/SFAPIClient.html"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></td>
           <td></td>        </tr>        <tr><td><div class="circle circle-m">M</div></td>
+          <td>  <a href="SFClient/SalesForce/SFAPIClient.html#method___construct">__construct</a>()</td>
+          <td><a href="SFClient/SalesForce/SFAPIClient.html"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></td>
+          <td>SFClient constructor.</td>        </tr>        <tr><td><div class="circle circle-m">M</div></td>
           <td>  <a href="SFClient/SalesForce/SFAPIClient.html#method__send">_send</a>()</td>
           <td><a href="SFClient/SalesForce/SFAPIClient.html"><abbr title="SFClient\SalesForce\SFAPIClient">SFAPIClient</abbr></a></td>
           <td></td>        </tr>        <tr><td><div class="circle circle-p">P</div></td>
