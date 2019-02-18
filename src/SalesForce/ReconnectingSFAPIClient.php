@@ -7,7 +7,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use SFClient\Result\Result;
 use SFClient\Auth\Authentication;
-use SFClient\Endpoint\Endpoint;
 use SFClient\Exceptions\FailedToAuthenticate;
 
 /**
@@ -23,9 +22,10 @@ class ReconnectingSFAPIClient extends SFAPIClient {
   private $_auth;
 
   /**
-   * SFClient constructor.
+   * ReconnectingSFClient constructor.
    * @param Client $client
    * @param string $token
+   * @param Authentication $auth
    */
   protected function __construct(Client $client, string $token, Authentication $auth) {
     parent::__construct($client, $token);
@@ -34,29 +34,12 @@ class ReconnectingSFAPIClient extends SFAPIClient {
 
   /**
    * Constructs a new SalesForce API client with a custom Http client and the
-   * given authentication mechanism.
+   * given authentication mechanism.  Extended from SFAPIClient::connectWith() to
+   * include $auth in the construction of the ReconnectingSFAPIClient.
    *
-   * It is expected that the caller has correctly configured the Http client
-   * ahead of time with the appropriate
-   * SalesForce base endpoint url.
-   * ```php
-   * $auth = new PasswordAuth(
-   *   'key',
-   *   'secret',
-   *   'user',
-   *   'pass'
-   * );
-   *
-   * $client = new Client([
-   *   'base_uri' => 'https://my.endpoint.salesforce.com/services/data/v12.3/'
-   * ]);
-   *
-   * $sfClient = SFAPIClient::reconnectingConnectWith($client, $auth);
-   * ```
-   *
-   * @param Client $client Http client that will be used by the SFAPIClient to communicate with the SalesForce API
+   * @param Client $client Http client that will be used by the ReconnectingSFAPIClient to communicate with the SalesForce API
    * @param Authentication $auth SalesForce authentication mechanism
-   * @return ReconnectingSFAPIClient
+   * @return SFAPIClient
    * @throws FailedToAuthenticate
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
@@ -77,7 +60,8 @@ class ReconnectingSFAPIClient extends SFAPIClient {
   }
 
   /**
-   * Executes an arbitrary request against the SalesForce API
+   * Executes an arbitrary request against the SalesForce API.  Extended from
+   * SFAPICLient to attempt reauthorization if the request fails due to a 401 error
    *
    * @param Request $request
    * @param boolean $retry
