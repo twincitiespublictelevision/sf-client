@@ -33,25 +33,6 @@ class ReconnectingSFAPIClient extends SFAPIClient {
   }
 
   /**
-   * Constructs a new SalesForce API client with a given SalesForce API endpoint
-   * and authentication mechanism.
-   *
-   * @param Endpoint $endpoint SalesForce endpoint to make calls against
-   * @param Authentication $auth SalesForce authentication mechanism
-   * @return ReconnectingSFAPIClient
-   * @throws FailedToAuthenticate
-   * @throws \GuzzleHttp\Exception\GuzzleException
-   */
-  /*
-  public static function connect(Endpoint $endpoint, Authentication $auth): SFAPIClient {
-    $client = new Client([
-      'base_uri' => $endpoint->getUrl()
-    ]);
-
-    return self::connectWith($client, $auth);
-  }*/
-
-  /**
    * Constructs a new SalesForce API client with a custom Http client and the
    * given authentication mechanism.
    *
