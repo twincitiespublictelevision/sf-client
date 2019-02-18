@@ -57,7 +57,7 @@ class SFAPIClient {
    * @param Client $client
    * @param string $token
    */
-  private function __construct(Client $client, string $token) {
+  protected function __construct(Client $client, string $token) {
     $this->_client = $client;
     $this->_token = $token;
   }
@@ -77,7 +77,7 @@ class SFAPIClient {
       'base_uri' => $endpoint->getUrl()
     ]);
 
-    return self::connectWith($client, $auth);
+    return static::connectWith($client, $auth);
   }
 
   /**
