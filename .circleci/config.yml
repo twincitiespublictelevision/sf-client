@@ -6,7 +6,7 @@ orbs:
 jobs:
   checkout:
     docker:
-    - image: circleci/php:7.1
+    - image: circleci/php:7.4.9
       auth:
         username: $DOCKERHUB_ACCOUNT
         password: $DOCKERHUB_PASSWORD
@@ -22,7 +22,7 @@ jobs:
 
   should_build:
     docker:
-    - image: circleci/php:7.1
+    - image: circleci/php:7.4.9
       auth:
         username: $DOCKERHUB_ACCOUNT
         password: $DOCKERHUB_PASSWORD
@@ -48,7 +48,7 @@ jobs:
 
   php_test:
     docker:
-      - image: circleci/php:7.1
+      - image: circleci/php:7.4.9
         auth:
           username: $DOCKERHUB_ACCOUNT
           password: $DOCKERHUB_PASSWORD
@@ -82,7 +82,7 @@ jobs:
 
   deploy_to_github:
     docker:
-    - image: circleci/php:7.1
+    - image: circleci/php:7.4.9
       auth:
         username: $DOCKERHUB_ACCOUNT
         password: $DOCKERHUB_PASSWORD
